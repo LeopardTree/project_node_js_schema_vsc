@@ -47,23 +47,6 @@ function addGreenBorder() {
         element2.style.border = "0px dotted red";
         element3.style.borde = "0px dotted red";
         //alternativt ta bort alla divs och skriv bara ut n�r n�sta lektion b�rjar
-    }
-}
-
-//Pulse Effect
-pulseEffect();
-function pulseEffect(){
-    0% {
-        transform: scale(0.97)
-    }
-    
-    70% {
-        transform: scale(1)
-    }
-    
-    100% {
-        transform: scale(0.97)
-    }
 }
 
 //Stop the pulse effect
@@ -81,4 +64,4 @@ function pulseEffectStop(){
         transform: scale(1)
     }
 }
-
+}
