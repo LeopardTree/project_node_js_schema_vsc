@@ -11,14 +11,14 @@ function addGreenBorder() {
     var element1 = document.getElementById('div1');
     var element2 = document.getElementById('div2');
     var element3 = document.getElementById('div3');
-    if (time >= 9 && time <= 12) {
+    if (time >= 9 && time < 12) {
         //make greenborder on div1
         element1.style.border = "6px solid green";
         //make normal border colour on div2 and div3
         element2.style.border = "0px dotted red";
         element3.style.border = "0px dotted red";
     }
-    else if (time >= 12 && time <= 13) {
+    else if (time >= 12 && time < 13) {
         //make greenborder on div2
         element2.style.border = "6px solid green";
         //make normal border color on div1 and div3
@@ -37,6 +37,6 @@ function addGreenBorder() {
         element1.style.border = "0px dotted red";
         element2.style.border = "0px dotted red";
         element3.style.borde = "0px dotted red";
-        //alternativt ta bort alla divs och skriv bara ut n�r n�sta lektion b�rjar
+        //alternativt ta bort alla divs och skriv bara ut när nästa lektion börjar
     }
 }
