@@ -37,6 +37,6 @@ function addGreenBorder() {
         element1.style.border = "0px dotted red";
         element2.style.border = "0px dotted red";
         element3.style.borde = "0px dotted red";
-        //alternativt ta bort alla divs och skriv bara ut när nästa lektion börjar
+        //alternativt ta bort alla divs och skriv bara ut nï¿½r nï¿½sta lektion bï¿½rjar
     }
 }
