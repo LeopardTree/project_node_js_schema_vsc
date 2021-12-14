@@ -1,9 +1,9 @@
-function addDate(){
-    var dt = new Date();
-    document.getElementById('date-time').innerHTML = dt.toLocaleString();
-    document.getElementById('date-time').innerHTML = dt.toLocaleDateString();
-}
-addDate();
+// function addDate(){
+//     var dt = new Date();
+//     document.getElementById('date-time').innerHTML = dt.toLocaleString();
+//     document.getElementById('date-time').innerHTML = dt.toLocaleDateString();
+// }
+// addDate();
 
 
 
@@ -51,4 +51,9 @@ function addGreenBorder() {
         element3.style.borde = "0px dotted red";
         //alternativt ta bort alla divs och skriv bara ut när nästa lektion börjar
     }
+<<<<<<< HEAD
 }
+=======
+       
+}
+>>>>>>> Ludvig
