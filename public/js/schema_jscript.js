@@ -1,6 +1,9 @@
-var dt = new Date();
-document.getElementById('date-time').innerHTML = dt.toLocaleString();
-document.getElementById('date-time').innerHTML = dt.toLocaleDateString();
+function addDate(){
+    var dt = new Date();
+    document.getElementById('date-time').innerHTML = dt.toLocaleString();
+    document.getElementById('date-time').innerHTML = dt.toLocaleDateString();
+}
+addDate();
 
 
 
@@ -46,5 +49,6 @@ function addGreenBorder() {
         element1.style.border = "0px dotted red";
         element2.style.border = "0px dotted red";
         element3.style.borde = "0px dotted red";
-        //alternativt ta bort alla divs och skriv bara ut n�r n�sta lektion b�rjar
-}}
+        //alternativt ta bort alla divs och skriv bara ut när nästa lektion börjar
+    }
+}
