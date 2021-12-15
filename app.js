@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 const fs = require('fs');
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true}));
 
 // Static files
 app.use(express.static('public'))
@@ -16,14 +18,18 @@ app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 
 app.post('/', function(req, res) {
+    
+    var comment1 = req.body.commentInput;
+    //console.log(comment1);
+
+
     left = req.body.left,
     right = req.body.right;
     if(right == "true"){left = "false"};
     if(left == "true"){right = "false" };
     dt = selectDate(dt);
-    addJsToEsjIfToday();
     readData();
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: addJavascript})
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
 });
 
 // Get values from data at right date
@@ -31,7 +37,7 @@ var place = "";
 var am = "";
 var pm = "";
 var left = "", right = "";
-var addJavascript = "";
+var array = "";
 // Functions for next or previous day
 // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
 function addDay(date) {
@@ -62,25 +68,17 @@ function selectDate(){
     }
     return dt;
 }
-function addJsToEsjIfToday(){
-    var today = new Date();
-    today = today.toLocaleDateString();
-    if(dt == today){
-        addJavascript = '<script type="text/javascript" src="js/schema_jscript.js"></script>';
-    }
-    else 
-        addJavascript = "";
-}
 function readData(){
     fs.readFile('public/data/data.txt', (err, data) => {
         if(err){
           console.log(err);  
         }
         
-        var array = data.toString().split(/\r?\n/);
+        readFile();
+        console.log(array);
         for(i in array) {
             array[i] = array[i].toString().split(",");
-            if(array[i][0] == dt){
+            if(array[i][0] == dt){     
                 place = array[i][1];
                 am = array[i][2];
                 pm = array[i][4];
@@ -92,12 +90,21 @@ function readData(){
 }
 readData();
 
-// console.log('last line');
+function readFile(){
+    fs.readFile('public/data/data.txt', (err, data) => {
+        if(err){
+          console.log(err);  
+        }
+        array = data.toString().split(/\r?\n/);
+    });
+}
 
-// //writing files
-// fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
-//     console.log('file was written');
-// });
+
+
+//writing files
+fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
+    console.log('file was written');
+});
 
 
 // Set Views
@@ -106,8 +113,7 @@ app.set('view engine', 'ejs')
 
 
 app.get('/', (req, res) => {
-    addJsToEsjIfToday();
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: addJavascript})
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
 })
 
 

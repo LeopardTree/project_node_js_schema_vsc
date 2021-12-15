@@ -7,7 +7,7 @@
     #wrapperAll{height: 200px; margin-top: 0.5%; width: 100%;}
     #wrapper{height: 200px; margin-top: 0.5%; width: 100%;}
     #wrapper2{height: 25px; margin-top: 0.5%; width: 100%;}
-    #div1{display: inline-block; width: 41%; border-radius: 15px; block-size: 150px; background-color: white; margin-left: 1%; text-align: center; margin-top: 0.4%; background-color: burlywood;}
+    #div1{display: inline-block; width: 41%; border-radius: 15px; block-size: 150px; background-color: white; margin-left: 1%; text-align: center; margin-top: 0.4%; background-color: burlywood; position: absolute;}
 	@keyframes pulse {
 		0% {
 			transform: scale(0.97);
@@ -21,8 +21,8 @@
 			transform: scale(0.97);
 		}
 	}
-    #div2{display: inline-block; width: 15%; border-radius: 15px;  block-size: 150px; background-color: white; margin-left: 0.5%; text-align: center; background-color: burlywood;}
-    #div3{display: inline-block; width: 40.5%; border-radius: 15px; block-size: 150px; background-color: white; margin-left: 0.5%; text-align: center; background-color: burlywood;}
+    #div2{display: inline-block; width: 15%; border-radius: 15px;  block-size: 150px; background-color: white; margin-left: 0.5%; text-align: center; background-color: burlywood; margin-top: 0.4%; position: absolute; left: 42.5%;}
+    #div3{display: inline-block; width: 40.5%; border-radius: 15px; block-size: 150px; background-color: white; margin-left: 0.5%; text-align: center; background-color: burlywood; margin-top: 0.4%; position: absolute; left: 58%;}
     #font{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; text-align: center;}
     #lesson1{display: inline-block; width: 41%; border-radius: 15px; block-size: 20px; background-color: black; margin-left: 1%; text-align: center; margin-top: 0.4%;}
     #lunch{display: inline-block; width: 15%; border-radius: 15px;  block-size: 20px; background-color: black; margin-left: 0.5%; text-align: center;}
@@ -55,12 +55,24 @@
     </div>
     <!--Lesson Blocks-->
     <div id="wrapper">
-        <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text2%></div>
-        <div id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> Lunch </div>
-        <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text3%></div>
+        <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text2%>
+            <textarea placeholder="..." style="position: absolute; top: 20%; width: 95%; left: 2%; height: 70%; background-color: burlywood; border: none; resize: none;">
+                <%= text5%>
+            </textarea>
+        </div>
+        <div id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> Lunch 
+            
+        </div>
+        <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text3%>
+            
+        </div>
     </div>
+    <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
+        <label for="comment1">Kommentar</label>
+        <input type="text" id="comment1" name="commentInput">
+    </form>
 
-    // https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil
+    <!--https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil-->
 
     <h2 style="display:none;" id="uid"><%=text4 %></h2>
     <script type="text/javascript">
@@ -119,7 +131,16 @@
     }
 });
     </script>
-    
+
+    <!-- <script>
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode == 13) {
+        var input = document.getElementById("userInput").value;
+        alert(input);
+        }
+});
+    </script> -->
+
     <!-- <script type="text/javascript" src="js/schema_jscript.js"></script> -->
 </body>
 </html>
