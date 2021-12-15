@@ -27,6 +27,8 @@
     #lesson1{display: inline-block; width: 41%; border-radius: 15px; block-size: 20px; background-color: black; margin-left: 1%; text-align: center; margin-top: 0.4%;}
     #lunch{display: inline-block; width: 15%; border-radius: 15px;  block-size: 20px; background-color: black; margin-left: 0.5%; text-align: center;}
     #lesson2{display: inline-block; width: 40.5%; border-radius: 15px; block-size: 20px; background-color: black; margin-left: 0.5%; text-align: center;}
+    #button1{background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden; outline: none; color: burlywood; font-size: 150%; position: absolute;}
+    #button2{background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden; outline: none; color: burlywood; font-size: 150%; position: absolute;}
 </style>
 </head>
 <body>
@@ -36,10 +38,10 @@
     <p id="font" style="font-size: 175%;"><%= text4%></p>
     <p id="font" style="font-size: 140%;"><%= text%></p>
     <form action="" method="post">
-        <button name="left" value="true">Previous</button>
+        <button id="button1" name="left" value="true" style="left: 685px; top: 74px;"><</button>
     </form>
     <form action="" method="post">
-        <button name="right" value="true">Next</button>
+        <button id="button2" name="right" value="true" style="left: 885px; top: 74px;">></button>
     </form>
     <!-- <button name="left" value="true">Previous</button>
     <button name="right" value="true">Next</button> -->
@@ -53,9 +55,9 @@
     </div>
     <!--Lesson Blocks-->
     <div id="wrapper">
-        <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> <%= text2%></div>
-        <div id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> Lunch </div>
-        <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> <%= text3%></div>
+        <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text2%></div>
+        <div id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> Lunch </div>
+        <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text3%></div>
     </div>
 
     // https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil
@@ -106,6 +108,16 @@
                 
                 
             }
+    </script>
+    <script>
+        document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 37) {
+        document.getElementById("button1").click();
+    }
+    else if(event.keyCode == 39) {
+        document.getElementById("button2").click();
+    }
+});
     </script>
     
     <!-- <script type="text/javascript" src="js/schema_jscript.js"></script> -->
