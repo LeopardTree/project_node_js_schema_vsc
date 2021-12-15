@@ -30,23 +30,84 @@
 </style>
 </head>
 <body>
+
     <h1 id="font" style="margin-top: 3px" ;>Schema MJU20</h1>
-    <p id="font" style="font-size: 175%;"><span id='date-time'></span></p>
+    <!-- <span id='date-time'></span> -->
+    <p id="font" style="font-size: 175%;"><%= text4%></p>
     <p id="font" style="font-size: 140%;"><%= text%></p>
+    <form action="" method="post">
+        <button name="left" value="true">Previous</button>
+    </form>
+    <form action="" method="post">
+        <button name="right" value="true">Next</button>
+    </form>
+    <!-- <button name="left" value="true">Previous</button>
+    <button name="right" value="true">Next</button> -->
     <div style="height: 160px;"></div>
     <div></div>
     <!--Time Blocks-->
     <div id="wrapper2" onshow="">
-        <div id="lesson1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%; position: absolute;"> 09:00 - 12:00</div>
-        <div id="lunch" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%; position: absolute; right: 668px;"> 12:00 - 13:00 </div>
-        <div id="lesson2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%; position: absolute; right: 5px;"> 13:00 - 16:30 </div>
+        <div id="lesson1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%;"> 09:00 - 12:00</div>
+        <div id="lunch" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%;"> 12:00 - 13:00 </div>
+        <div id="lesson2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%;"> 13:00 - 16:30 </div>
     </div>
     <!--Lesson Blocks-->
     <div id="wrapper">
-        <div contenteditable="true" id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; position: absolute; top: 380px;"> <%= text2%></div>
-        <div contenteditable="true" id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; position: absolute; right: 668px; top: 387px;"> Lunch </div>
-        <div contenteditable="true" id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; position: absolute; right: 5px; top: 382px;"> <%= text3%></div>
+        <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> <%= text2%></div>
+        <div id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> Lunch </div>
+        <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> <%= text3%></div>
     </div>
-    <script type="text/javascript" src="js/schema_jscript.js"></script>
+
+    // https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil
+
+    <h2 style="display:none;" id="uid"><%=text4 %></h2>
+    <script type="text/javascript">
+            var dateShowing = document.getElementById('uid').innerHTML; 
+            // alert(x);  // now JS variable 'x' has the uid that's passed from the node backend.
+            addGreenBorder();
+            function addGreenBorder() {
+                var today = new Date();
+                if(dateShowing == today.toLocaleDateString()){
+                    var time = today.getHours();
+                    var timemin = today.getMinutes();
+                    var hourandmin = time * 100 + timemin;
+                    var element1 = document.getElementById('div1');
+                    var element2 = document.getElementById('div2');
+                    var element3 = document.getElementById('div3');
+                    if (time >= 9 && time < 12) {
+                        //make greenborder on div1
+                        element1.style.border = "6px solid green";
+                        //make normal border colour on div2 and div3
+                        element2.style.border = "0px dotted red";
+                        element3.style.border = "0px dotted red";
+                    }
+                    else if (time >= 12 && time < 13) {
+                        //make greenborder on div2
+                        element2.style.border = "6px solid green";
+                        //make normal border color on div1 and div3
+                        element1.style.border = "0px dotted red";
+                        element3.style.border = "0px dotted red";
+                    }
+                    else if (time >= 13 && hourandmin <= 1630) {
+                        //make greenborder on div3
+                        element3.style.border = "6px solid green";
+                        //make normal border colour on div1 och div2
+                        element2.style.border = "0px dotted red";
+                        element1.style.border = "0px dotted red";
+                    }
+                    else {
+                        //make all normal borders
+                        element1.style.border = "0px dotted red";
+                        element2.style.border = "0px dotted red";
+                        element3.style.borde = "0px dotted red";
+                        //alternativt ta bort alla divs och skriv bara ut när nästa lektion börjar
+                    }
+                }
+                
+                
+            }
+    </script>
+    
+    <!-- <script type="text/javascript" src="js/schema_jscript.js"></script> -->
 </body>
 </html>

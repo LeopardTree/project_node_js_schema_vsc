@@ -1,9 +1,9 @@
-function addDate(){
-    var dt = new Date();
-    document.getElementById('date-time').innerHTML = dt.toLocaleString();
-    document.getElementById('date-time').innerHTML = dt.toLocaleDateString();
-}
-addDate();
+// function addDate(){
+//     var dt = new Date();
+//     document.getElementById('date-time').innerHTML = dt.toLocaleString();
+//     document.getElementById('date-time').innerHTML = dt.toLocaleDateString();
+// }
+// addDate();
 
 
 

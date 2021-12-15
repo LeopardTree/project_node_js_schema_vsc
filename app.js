@@ -21,9 +21,9 @@ app.post('/', function(req, res) {
     if(right == "true"){left = "false"};
     if(left == "true"){right = "false" };
     dt = selectDate(dt);
-    console.log(dt);
+    addJsToEsjIfToday();
     readData();
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: addJavascript})
 });
 
 // Get values from data at right date
@@ -31,6 +31,7 @@ var place = "";
 var am = "";
 var pm = "";
 var left = "", right = "";
+var addJavascript = "";
 // Functions for next or previous day
 // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
 function addDay(date) {
@@ -60,6 +61,15 @@ function selectDate(){
         right = "false";
     }
     return dt;
+}
+function addJsToEsjIfToday(){
+    var today = new Date();
+    today = today.toLocaleDateString();
+    if(dt == today){
+        addJavascript = '<script type="text/javascript" src="js/schema_jscript.js"></script>';
+    }
+    else 
+        addJavascript = "";
 }
 function readData(){
     fs.readFile('public/data/data.txt', (err, data) => {
@@ -96,7 +106,8 @@ app.set('view engine', 'ejs')
 
 
 app.get('/', (req, res) => {
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
+    addJsToEsjIfToday();
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: addJavascript})
 })
 
 
