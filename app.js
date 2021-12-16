@@ -1,130 +1,109 @@
-// // imports
-// const express = require('express')
-// const app = express()
-// const port = 3000
-// const fs = require('fs');
+// imports
+const express = require('express')
+const app = express()
+const port = 3000
+const fs = require('fs');
 
-// // Static files
-// app.use(express.static('public'))
-// app.use('/css', express.static(__dirname + 'public/css'))
-// app.use('/img', express.static(__dirname + 'public/img'))
-// app.use('/js', express.static(__dirname + 'public/js'))
-// app.use('/data', express.static(__dirname + 'public/data'))
+// Static files
+app.use(express.static('public'))
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/img', express.static(__dirname + 'public/img'))
+app.use('/js', express.static(__dirname + 'public/js'))
+app.use('/data', express.static(__dirname + 'public/data'))
 
-// // Access data from client. https://stackoverflow.com/questions/4295782/how-to-process-post-data-in-node-js
-// app.use(express.json());       // to support JSON-encoded bodies
-// app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
+// Access data from client. https://stackoverflow.com/questions/4295782/how-to-process-post-data-in-node-js
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 
-// app.post('/', function(req, res) {
-//     left = req.body.left,
-//     right = req.body.right;
-//     if(right == "true"){left = "false"};
-//     if(left == "true"){right = "false" };
-//     dt = selectDate(dt);
-//     readData();
-//     left = "false";
-//     right = "false";
-//     res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
+app.post('/', function(req, res) {
+    left = req.body.left,
+    right = req.body.right;
+    if(right == "true"){left = "false"};
+    if(left == "true"){right = "false" };
+    dt = selectDate(dt);
+    readData();
+    left = "false";
+    right = "false";
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
     
+});
+
+
+// Get values from data at right date
+var place = "";
+var am = "";
+var pm = "";
+var left = "", right = "";
+var addJavascript = "";
+// Functions for next or previous day
+// https://stackoverflow.com/questions/563406/add-days-to-javascript-date
+function addDay(date) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + 1);
+    result = result.toLocaleDateString();
+    return result;
+}
+function previousDay(date){
+    var result = new Date(date);
+    result.setDate(result.getDate() - 1);
+    result = result.toLocaleDateString();
+    return result;
+}
+if (typeof dt === 'undefined') {
+dt = new Date();
+dt = dt.toLocaleDateString();
+}
+var dt = selectDate();
+function selectDate(){
+    if(left == "true"){
+        dt = previousDay(dt);
+        left = "false";
+    }
+    if(right == "true"){
+        dt = addDay(dt);
+        right = "false";
+    }
+    return dt;
+}
+
+function readData(){
+    fs.readFile('public/data/data.txt', (err, data) => {
+        if(err){
+          console.log(err);  
+        }
+        
+        var array = data.toString().split(/\r?\n/);
+        for(i in array) {
+            array[i] = array[i].toString().split(",");
+            if(array[i][0] == dt){
+                place = array[i][1];
+                am = array[i][2];
+                pm = array[i][4];
+                comment1 = array[i][5];
+                comment2 = array[i][6];
+            }
+        }
+    })
+}
+readData();
+
+
+// //writing files
+// fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
+//     console.log('file was written');
 // });
 
 
-// // Get values from data at right date
-// var place = "";
-// var am = "";
-// var pm = "";
-// var left = "", right = "";
-// var addJavascript = "";
-// // Functions for next or previous day
-// // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
-// function addDay(date) {
-//     var result = new Date(date);
-//     result.setDate(result.getDate() + 1);
-//     result = result.toLocaleDateString();
-//     return result;
-// }
-// function previousDay(date){
-//     var result = new Date(date);
-//     result.setDate(result.getDate() - 1);
-//     result = result.toLocaleDateString();
-//     return result;
-// }
-// if (typeof dt === 'undefined') {
-// dt = new Date();
-// dt = dt.toLocaleDateString();
-// }
-// var dt = selectDate();
-// function selectDate(){
-//     if(left == "true"){
-//         dt = previousDay(dt);
-//         left = "false";
-//     }
-//     if(right == "true"){
-//         dt = addDay(dt);
-//         right = "false";
-//     }
-//     return dt;
-// }
-
-// function readData(){
-//     fs.readFile('public/data/data.txt', (err, data) => {
-//         if(err){
-//           console.log(err);  
-//         }
-        
-//         var array = data.toString().split(/\r?\n/);
-//         for(i in array) {
-//             array[i] = array[i].toString().split(",");
-//             if(array[i][0] == dt){
-//                 place = array[i][1];
-//                 am = array[i][2];
-//                 pm = array[i][4];
-//                 comment1 = array[i][5];
-//                 comment2 = array[i][6];
-//             }
-//         }
-//     })
-// }
-// readData();
-
-// // Login to page
-// // http://moodle.molk.se/login/index.php
+// Set Views
+app.set('views', './views')
+app.set('view engine', 'ejs')
 
 
-// // //writing files
-// // fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
-// //     console.log('file was written');
-// // });
+app.get('/', (req, res) => {
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
+})
 
 
-// // Set Views
-// app.set('views', './views')
-// app.set('view engine', 'ejs')
+// listen on port 3000
+app.listen(port, () => console.info(`Listening on port ${port}`))
 
-
-// app.get('/', (req, res) => {
-//     res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
-// })
-
-
-// // listen on port 3000
-// app.listen(port, () => console.info(`Listening on port ${port}`))
-
-const superagent = require('superagent').agent();
-
-// const molk_moodle = async() => {
-//     let dashboard = await superagent
-//     .post('https://www.ytmonster.net/login?login=ok')
-//     .send({username: 'waqd1369', password: 'qwer1369'})
-//     .set('Content-Type', 'application/x-www-form-urlencoded')
-//     console.log(dashboard.text);
-// };
-// molk_moodle();
-superagent
-    .post( 'https://www.ytmonster.net/login?login=ok' )
-    .type('form') // send request in form format
-    .send( { api_type: 'json', rem: 'True',
-              user: 'waqd1369', passwd: 'qwer1369' } )
-    .end( function(err, res) {
-      console.log( 'Session cookie: ', res.body.json.data.cookie || res.headers['set-cookie']);
-    });
