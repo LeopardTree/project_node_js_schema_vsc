@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 
 app.post('/', function(req, res) {
     
-    comment1 += '\n' + req.body.commentInput;
+    comment1 = req.body.commentInput;
     console.log(comment1);
     //createWritestring();
 
