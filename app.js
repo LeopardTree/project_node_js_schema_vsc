@@ -16,16 +16,18 @@ app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 
 app.post('/', function(req, res) {
+    
+    var comment1 = req.body.commentInput;
+    //console.log(comment1);
+
+
     left = req.body.left,
     right = req.body.right;
     if(right == "true"){left = "false"};
     if(left == "true"){right = "false" };
     dt = selectDate(dt);
     readData();
-    left = "false";
-    right = "false";
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
-    
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
 });
 
 
@@ -34,7 +36,7 @@ var place = "";
 var am = "";
 var pm = "";
 var left = "", right = "";
-var addJavascript = "";
+var array = "";
 // Functions for next or previous day
 // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
 function addDay(date) {
@@ -65,17 +67,17 @@ function selectDate(){
     }
     return dt;
 }
-
 function readData(){
     fs.readFile('public/data/data.txt', (err, data) => {
         if(err){
           console.log(err);  
         }
         
-        var array = data.toString().split(/\r?\n/);
+        readFile();
+        console.log(array);
         for(i in array) {
             array[i] = array[i].toString().split(",");
-            if(array[i][0] == dt){
+            if(array[i][0] == dt){     
                 place = array[i][1];
                 am = array[i][2];
                 pm = array[i][4];
@@ -87,11 +89,21 @@ function readData(){
 }
 readData();
 
+function readFile(){
+    fs.readFile('public/data/data.txt', (err, data) => {
+        if(err){
+          console.log(err);  
+        }
+        array = data.toString().split(/\r?\n/);
+    });
+}
 
-// //writing files
-// fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
-//     console.log('file was written');
-// });
+
+
+//writing files
+fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
+    console.log('file was written');
+});
 
 
 // Set Views
