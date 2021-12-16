@@ -17,9 +17,9 @@ app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 
 app.post('/', function(req, res) {
     
-    var comment1 = req.body.commentInput;
-    //console.log(comment1);
-
+    comment1 += '\n' + req.body.commentInput;
+    console.log(comment1);
+    //createWritestring();
 
     left = req.body.left,
     right = req.body.right;
@@ -27,11 +27,15 @@ app.post('/', function(req, res) {
     if(left == "true"){right = "false" };
     dt = selectDate(dt);
     readData();
+    
+    // writeToFile();
+    console.log(fs.readFileSync('public/data/datatest.txt', "utf8"));
     res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
 });
 
 
 // Get values from data at right date
+var comment1 = "";
 var place = "";
 var am = "";
 var pm = "";
@@ -67,43 +71,59 @@ function selectDate(){
     }
     return dt;
 }
-function readData(){
-    fs.readFile('public/data/data.txt', (err, data) => {
-        if(err){
-          console.log(err);  
-        }
-        
-        readFile();
-        console.log(array);
-        for(i in array) {
-            array[i] = array[i].toString().split(",");
-            if(array[i][0] == dt){     
-                place = array[i][1];
-                am = array[i][2];
-                pm = array[i][4];
-                comment1 = array[i][5];
-                comment2 = array[i][6];
-            }
-        }
-    })
-}
-readData();
-
 function readFile(){
-    fs.readFile('public/data/data.txt', (err, data) => {
-        if(err){
-          console.log(err);  
+    const data = fs.readFileSync('public/data/data.txt',
+            {encoding:'utf8', flag:'r'});
+    array = data.toString().split(/\r?\n/);
+    
+}
+function readData(){
+    readFile();
+    //console.log(array);
+    for(i in array) {
+        array[i] = array[i].toString().split(", ");
+        if(array[i][0] == dt){     
+            place = array[i][1];
+            am = array[i][2];
+            pm = array[i][4];
+            // if(array.length > 5){
+            //     comment1 = array[i][5];
+            // }
+            
+            //comment2 = array[i][6];
         }
-        array = data.toString().split(/\r?\n/);
-    });
+    }
+    
 }
 
-
+function writeToFile(){
+    for(i in array) {
+        array[i] = array[i].toString();
+        if(i == 0){
+            fs.writeFileSync('public/data/datatest.txt', array[i], {
+                encoding: "utf8",
+                flag: "w"
+              });
+        }
+        else if(i == array.length -1){
+            fs.writeFileSync('public/data/datatest.txt', array[i], {
+                encoding: "utf8",
+                flag: "a+"
+              });
+        }
+        else
+            var temp = array[i] + '\n';
+            fs.writeFileSync('public/data/datatest.txt', temp, {
+                encoding: "utf8",
+                flag: "a+"
+              });
+    }
+}
 
 //writing files
-fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
-    console.log('file was written');
-});
+// fs.writeFile('./docs/blog1.txt', 'hello, world', () =>{
+//     console.log('file was written');
+// });
 
 
 // Set Views
@@ -112,7 +132,7 @@ app.set('view engine', 'ejs')
 
 
 app.get('/', (req, res) => {
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt})
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
 })
 
 
