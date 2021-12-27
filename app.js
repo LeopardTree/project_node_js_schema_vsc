@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 app.post('/', function(req, res) {
     
     comment1 = req.body.commentInput;
-    console.log(comment1);
+    //console.log(comment1);
     //createWritestring();
 
     left = req.body.left,
@@ -29,7 +29,7 @@ app.post('/', function(req, res) {
     readData();
     
     // writeToFile();
-    console.log(fs.readFileSync('public/data/datatest.txt', "utf8"));
+    //console.log(fs.readFileSync('public/data/datatest.txt', "utf8"));
     res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
 });
 
