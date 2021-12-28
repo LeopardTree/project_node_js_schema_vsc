@@ -92,6 +92,10 @@ function addData(){
                 if(array.length < 7){
                     array[i].push(comment2);
                 }
+                else if(array.length < 6){
+                    array[i].push('');
+                    array[i].push(comment2);
+                }
                 else 
                     array[i][6] = comment2;
             }
@@ -112,37 +116,43 @@ app.use(function (req, res, next) {
     
     readFile();
     readData();
+    console.log('data have been read');
+    console.log('---');
     next()
   });
 
 //app.posts
 app.post('/', function(req, res) {
     
-    if(typeof req.body.commentInput !== 'undefined'){
-        comment1 = req.body.commentInput.toString();
-    }
-    if(typeof req.body.commentInput2 !== 'undefined'){
-        comment2 = req.body.commentInput2.toString();
-    }
-    //createWritestring();
+    
 
     left = req.body.left,
     right = req.body.right;
     if(right == "true"){left = "false"};
     if(left == "true"){right = "false" };
     dt = selectDate(dt);
-    addData();
-    writeToFile();
+
+    if(typeof req.body.commentInput !== 'undefined'){
+        comment1 = req.body.commentInput.toString();
+        addData();
+        console.log('data added');
+        console.log('---');
+        writeToFile();
+        console.log('data written');
+    }
+    if(typeof req.body.commentInput2 !== 'undefined'){
+        comment2 = req.body.commentInput2.toString();
+        addData();
+        console.log('data added');
+        console.log('---');
+        writeToFile();
+        console.log('data written');
+    }
+    
     //console.log(fs.readFileSync('public/data/datatest.txt', "utf8"));
     // res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
     res.redirect('/');
 });
-
-
-
-
-
-
 
 // Set Views
 app.set('views', './views');
