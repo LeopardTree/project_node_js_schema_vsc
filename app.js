@@ -3,7 +3,11 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const fs = require('fs');
+const mongoose = require('mongoose');
 
+// connect to mongoDb
+const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemaMju20?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Static files
 app.use(express.static('public'));
@@ -23,7 +27,7 @@ var comment2 = "";
 var place = "";
 var am = "";
 var pm = "";
-var left = "", right = "";
+var left = ""; right = "";
 var array = "";
 // Functions for next or previous day
 // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
