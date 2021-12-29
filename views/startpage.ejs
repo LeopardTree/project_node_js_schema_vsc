@@ -42,12 +42,18 @@ background-image: url("img/background_forest_gray.jfif");
             
         </div>
         <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text3%>
-            
+            <textarea placeholder="..." style="position: absolute; top: 20%; width: 95%; left: 2%; height: 70%; background-color: burlywood; border: none; resize: none;">
+                <%= text6%>
+            </textarea>
         </div>
     </div>
     <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
         <label for="comment1">Kommentar</label>
         <input type="text" id="comment1" name="commentInput">
+    </form>
+    <form name="form2" action="" method="post" id="userInput" style="width: 600px;" >
+        <label for="comment2">Kommentar</label>
+        <input type="text" id="comment2" name="commentInput2">
     </form>
 
     <!--https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil-->
@@ -69,6 +75,7 @@ background-image: url("img/background_forest_gray.jfif");
                     if (time >= 9 && time < 12) {
                         //make greenborder on div1
                         element1.style.border = "6px solid green";
+                        element1.style.animation = "pulse 4s infinite";
                         //make normal border colour on div2 and div3
                         element2.style.border = "0px dotted red";
                         element3.style.border = "0px dotted red";
@@ -76,14 +83,20 @@ background-image: url("img/background_forest_gray.jfif");
                     else if (time >= 12 && time < 13) {
                         //make greenborder on div2
                         element2.style.border = "6px solid green";
+                        element2.style.animation = "pulse 4s infinite";
                         //make normal border color on div1 and div3
+                        element1.style.animation = "";
                         element1.style.border = "0px dotted red";
                         element3.style.border = "0px dotted red";
+
                     }
-                    else if (time >= 13 && hourandmin <= 1630) {
+                    else if (time >= 13 && hourandmin < 1630) {
                         //make greenborder on div3
                         element3.style.border = "6px solid green";
+                        element3.style.animation = "pulse 4s infinite";
                         //make normal border colour on div1 och div2
+                        element1.style.animation = "";
+                        element2.style.animation = "";
                         element2.style.border = "0px dotted red";
                         element1.style.border = "0px dotted red";
                     }
@@ -94,7 +107,7 @@ background-image: url("img/background_forest_gray.jfif");
                         element3.style.borde = "0px dotted red";
                         //alternativt ta bort alla divs och skriv bara ut när nästa lektion börjar
                     }
-                }
+                    }
                 
                 
             }
