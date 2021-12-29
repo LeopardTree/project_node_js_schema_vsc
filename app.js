@@ -4,24 +4,9 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const mongoose = require('mongoose');
+const Schedule = require('./models/schedule');
 
-// connect to mongoDb
-const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemaMju20?retryWrites=true&w=majority';
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
-
-// Static files
-app.use(express.static('public'));
-app.use('/css', express.static(__dirname + 'public/css'));
-app.use('/img', express.static(__dirname + 'public/img'));
-app.use('/js', express.static(__dirname + 'public/js'));
-app.use('/data', express.static(__dirname + 'public/data'));
-
-// Access data from client. https://stackoverflow.com/questions/4295782/how-to-process-post-data-in-node-js
-app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
-
-//middleware
-// Get values from data at right date
+// variables
 var comment1 = "";
 var comment2 = "";
 var place = "";
@@ -29,6 +14,92 @@ var am = "";
 var pm = "";
 var left = ""; right = "";
 var array = "";
+
+// connect to mongoDb and then listen to port
+const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+.then((result) => app.listen(port, () => console.info(`Listening on port ${port}`)))
+.catch((err) => console.log(err));
+
+// static files
+app.use(express.static('public'));
+app.use('/css', express.static(__dirname + 'public/css'));
+app.use('/img', express.static(__dirname + 'public/img'));
+app.use('/js', express.static(__dirname + 'public/js'));
+app.use('/data', express.static(__dirname + 'public/data'));
+
+// access data from client. https://stackoverflow.com/questions/4295782/how-to-process-post-data-in-node-js
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
+
+// middleware
+app.use(function (req, res, next) {
+    
+    readFile();
+    readData();
+    console.log('data have been read');
+    console.log('---');
+    next()
+  });
+
+  // mongoose and mongo sandbox routes
+ app.get('/add_schedule', (req, res) =>{
+     const schedule = new Schedule({
+         date: '2021-12-29',
+         location: 'Distans',
+         am: 'Projektarbete',
+         pm: 'Projektarbete'
+     });
+     schedule.save()
+        .then((result) =>{
+            res.send(result)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+ }) 
+
+//app.posts
+app.post('/', function(req, res) {
+    left = req.body.left,
+    right = req.body.right;
+    if(right == "true"){left = "false"};
+    if(left == "true"){right = "false" };
+    dt = selectDate(dt);
+    console.log(dt);
+    if(typeof req.body.commentInput !== 'undefined'){
+        comment1 = req.body.commentInput.toString();
+        addData();
+        console.log('data added');
+        console.log('---');
+        writeToFile();
+        console.log('data written');
+    }
+    if(typeof req.body.commentInput2 !== 'undefined'){
+        comment2 = req.body.commentInput2.toString();
+        addData();
+        console.log('data added');
+        console.log('---');
+        writeToFile();
+        console.log('data written');
+    }
+    
+    // res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
+    res.redirect('/');
+});
+
+// Set Views
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+//app.gets
+app.get('/', (req, res) => {
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1, text6: comment2})
+});
+
+
+// functions
+
 // Functions for next or previous day
 // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
 function addDay(date) {
@@ -115,59 +186,3 @@ function writeToFile(){
         if (err) return console.log(err);
     });
 }
-
-app.use(function (req, res, next) {
-    
-    readFile();
-    readData();
-    console.log('data have been read');
-    console.log('---');
-    next()
-  });
-
-//app.posts
-app.post('/', function(req, res) {
-    
-    
-
-    left = req.body.left,
-    right = req.body.right;
-    if(right == "true"){left = "false"};
-    if(left == "true"){right = "false" };
-    dt = selectDate(dt);
-
-    if(typeof req.body.commentInput !== 'undefined'){
-        comment1 = req.body.commentInput.toString();
-        addData();
-        console.log('data added');
-        console.log('---');
-        writeToFile();
-        console.log('data written');
-    }
-    if(typeof req.body.commentInput2 !== 'undefined'){
-        comment2 = req.body.commentInput2.toString();
-        addData();
-        console.log('data added');
-        console.log('---');
-        writeToFile();
-        console.log('data written');
-    }
-    
-    //console.log(fs.readFileSync('public/data/datatest.txt', "utf8"));
-    // res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1})
-    res.redirect('/');
-});
-
-// Set Views
-app.set('views', './views');
-app.set('view engine', 'ejs');
-
-//app.gets
-app.get('/', (req, res) => {
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1, text6: comment2})
-});
-
-
-// listen on port 3000
-app.listen(port, () => console.info(`Listening on port ${port}`));
-
