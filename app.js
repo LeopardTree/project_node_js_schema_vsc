@@ -1,5 +1,7 @@
 // imports
 const express = require('express');
+const req = require('express/lib/request');
+const res = require('express/lib/response');
 const app = express();
 const port = 3000;
 const fs = require('fs');
@@ -161,6 +163,10 @@ app.set('view engine', 'ejs');
 //app.gets
 app.get('/', (req, res) => {
     res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1, text6: comment2})
+});
+
+app.get('/vecka', (req, res) => {
+    res.render('vecka', {text4: dt, text: place})
 });
 
 
