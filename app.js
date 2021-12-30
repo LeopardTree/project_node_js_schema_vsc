@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
 // mongoose and mongo sandbox routes
 app.get('/add_schedule', (req, res) =>{
      const schedule = new Schedule({
-         date: '2021-12-29',
+         date: '2021-12-30',
          location: 'Distans',
          am: 'Projektarbete',
          pm: 'Projektarbete'
@@ -58,23 +58,19 @@ app.get('/add_schedule', (req, res) =>{
             console.log(err);
         });
 });
-//temp add data from txt to mongodb
-// app.get('/add_schedules', (req, res) =>{
-//     readFile();
-//     let arr = array;
-//     for(i in arr) {
-//         arr[i] = arr[i].toString().split(",");
-//         const schedule = new Schedule({
-//             date: arr[i][0],
-//             location: arr[i][1],
-//             am: array[i][2],
-//             pm: array[i][4],
-//             course: 'OOP2'
-//         });
-//         schedule.save();
-//     }
-
-// });
+app.get('/find', (req, res) =>{
+    
+    Schedule.findOne({ date: '2021-12-30' })
+       .then((result) =>{
+        am = result.am;
+        pm = result.pm;
+        place = result.location;
+       })
+       .catch((err) => {
+           console.log(err);
+       });
+    res.send(am + pm + place);
+});
 
 
 //app.posts
