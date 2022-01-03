@@ -169,6 +169,10 @@ app.get('/vecka', (req, res) => {
     res.render('vecka', {text4: dt, text: place})
 });
 
+app.get('/register', (req, res) => {
+    res.render('register', {text4: dt, text: place})
+});
+
 
 // listen on port 3000
 app.listen(port, () => console.info(`Listening on port ${port}`));
