@@ -173,6 +173,10 @@ app.get('/register', (req, res) => {
     res.render('register', {text4: dt, text: place})
 });
 
+app.get('/login', (req, res) => {
+    res.render('login', {text4: dt, text: place})
+});
+
 
 // listen on port 3000
 app.listen(port, () => console.info(`Listening on port ${port}`));
