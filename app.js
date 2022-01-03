@@ -4,7 +4,6 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const mongoose = require('mongoose');
-const { findOneAndRemove } = require('./models/schedule');
 const Schedule = require('./models/schedule');
 
 // variables
@@ -23,24 +22,7 @@ if (typeof dt === 'undefined') {
     dt = dt.toLocaleDateString();
     }
 var dt = selectDate();
-Schedule.findOne({ date: dt })
-.then(doc =>{
-    if(doc != null){
-        am = doc.am;
-        pm = doc.pm;
-        place = doc.location;
-    }
-    else{
-        am = "";
-        pm = "";
-        place = "";
-    }
-    // res.send(am + pm + place);
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: '', text6: ''});
-})
-.catch((err) => {
-   console.log(err);
-});
+
 // connect to mongoDb and then listen to port
 const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
