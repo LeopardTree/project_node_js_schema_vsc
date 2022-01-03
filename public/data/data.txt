@@ -1,5 +1,5 @@
 2021-12-08,Sal 3/4,Lektion,Lunch,Eget arbete,testing,546346
-2021-12-09,Aulan,Lektion,Lunch,Eget arbete
+2021-12-09,Aulan,Lektion,Lunch,Eget arbete,,
 2021-12-10,Distans,Lektion,Lunch,Eget arbete,,
 2021-12-11,Distans,Lektion,Lunch,Eget arbete,,
 2021-12-12,Distans/Grupprum,Övning/Eget arbete,Lunch,Eget arbete,,
