@@ -14,6 +14,8 @@ var am = "";
 var pm = "";
 var left = ""; right = "";
 var array = "";
+var arr = "";
+var x = "";
 
 // connect to mongoDb and then listen to port
 const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
@@ -35,6 +37,8 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 // middleware
 app.use(function (req, res, next) {
     
+    
+
     readFile();
     readData();
     console.log('data have been read');
@@ -58,18 +62,42 @@ app.get('/add_schedule', (req, res) =>{
             console.log(err);
         });
 });
-app.get('/find', (req, res) =>{
+app.get('/find', async (req, res) =>{
     
-    Schedule.findOne({ date: '2021-12-30' })
-       .then((result) =>{
-        am = result.am;
-        pm = result.pm;
-        place = result.location;
-       })
-       .catch((err) => {
-           console.log(err);
-       });
-    res.send(am + pm + place);
+    // Schedule.findOne({ date: '2021-12-30' })
+    //    .then((result) =>{
+    //     am = result.am;
+    //     pm = result.pm;
+    //     place = result.location;
+    //     // res.send(am + pm + place);
+    //     res.render('startpage', { text: place, text2: am, text3: pm, text4: '2021-12-30', text5: '', text6: ''});
+    //    })
+    //    .catch((err) => {
+    //        console.log(err);
+    //    });
+    // find all documents and loop through. seems better to use findone...
+    // Schedule.find()
+    //    .then((result) =>{
+    //     arr = result;
+    //     for(i in arr) {
+    //         if(arr[i].date == '2021-12-30'){     
+    //             am = arr[i].am;
+    //             pm = arr[i].pm;
+    //             place = result.location;
+    //             break;
+    //         }
+    //         else 
+    //             am, pm , place, comment1, comment2 = "";
+    //     }
+    //     //res.send(result);
+    //     res.render('startpage', { text: place, text2: am, text3: pm, text4: '2021-12-30', text5: '', text6: ''});
+    //    })
+    //    .catch((err) => {
+    //        console.log(err);
+    //    });
+    x = await Schedule.find();
+    res.send(x);
+    
 });
 
 
@@ -108,7 +136,7 @@ app.set('view engine', 'ejs');
 
 //app.gets
 app.get('/', (req, res) => {
-    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1, text6: comment2})
+    res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: comment1, text6: comment2});
 });
 
 
