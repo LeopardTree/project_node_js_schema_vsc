@@ -49,21 +49,31 @@ app.use(function (req, res, next) {
 });
 
 // mongoose and mongo sandbox routes
-app.get('/add_schedule', (req, res) =>{
-     const schedule = new Schedule({
-         date: '2021-12-30',
-         location: 'Distans',
-         am: 'Projektarbete',
-         pm: 'Projektarbete'
-     });
-     schedule.save()
-        .then((result) =>{
-            res.send(result)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+app.post('/add_schedule', (req, res) =>{
+    newdate = req.body.dateInput;
+    newloc = req.body.locationInput;
+    newteacher1 = req.body.teacher1Input;
+    newam = req.body.amInput;
+    newpm = req.body.pmInput;
+    newcourse = req.body.courseInput;
+    const schedule = new Schedule({
+        date: newdate,
+        location: newloc,
+        am: newam,
+        pm: newpm,
+        teacher1: newteacher1,
+        course: newcourse
+    });
+    schedule.save()
+    .then((result) =>{
+        res.send(result)
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+    //res.send(newdate+ " "+ newloc+ " "+newteacher1+" "+ newam + " " + newpm + " " + newcourse)
 });
+
 
 // problem with assigning variable to document_object because of async... so using findOne directly in app.get for now 
 // async function findInDb(){
@@ -101,7 +111,9 @@ app.get('/', (req, res) => {
        console.log(err);
     });
 });
-
+app.get('/add_schedule', (req, res) => {
+    res.render('addnewday');
+});
 
 // functions
 
