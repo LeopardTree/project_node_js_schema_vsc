@@ -24,6 +24,14 @@ const scheduleSchema = new Schema({
     },
     course: {
         type: String,
+        required: true
+    },
+    teacher1: {
+        type: String,
+        required: true
+    },
+    teacher2: {
+        type: String,
         required: false
     },
     teacherCommentAm: {
