@@ -1,5 +1,7 @@
 // imports
 const express = require('express');
+const req = require('express/lib/request');
+const res = require('express/lib/response');
 const app = express();
 const port = 3000;
 const fs = require('fs');
@@ -131,6 +133,18 @@ app.get('/', (req, res) => {
 });
 app.get('/add_schedule', (req, res) => {
     res.render('addnewday');
+});
+
+app.get('/vecka', (req, res) => {
+    res.render('vecka', {text4: dt, text: place})
+});
+
+app.get('/register', (req, res) => {
+    res.render('register', {text4: dt, text: place})
+});
+
+app.get('/login', (req, res) => {
+    res.render('login', {text4: dt, text: place})
 });
 
 // functions

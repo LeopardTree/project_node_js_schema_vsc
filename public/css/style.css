@@ -127,4 +127,17 @@
     position: absolute;
 }
 
+.register-button {
+    background-color: red;
+    width: 4%;
+    margin-top: 11%;
+    display: inline-block;
+}
+
+.login-button {
+    background-color: red;
+    width: 3%;
+    display: inline-block;
+}
+
 
