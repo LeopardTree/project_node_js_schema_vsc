@@ -13,9 +13,7 @@ var place = "";
 var am = "";
 var pm = "";
 var left = ""; right = "";
-var array = "";
-var arr = "";
-var dayview = [];
+
 var x = "";
 if (typeof dt === 'undefined') {
     dt = new Date();
@@ -60,8 +58,6 @@ app.post('/add_schedule', (req, res) =>{
     let newtopic = req.body.topicInput;
     let newamcom = req.body.amcomInput;
     let newpmcom = req.body.pmcomInput;
-    let changedoc = "";
-    let yesno = "";
 
     newarr = [newloc, newteacher1, newam, newpm, newcourse, newteacher2, newtopic, newamcom, newpmcom];
     
