@@ -76,7 +76,6 @@ app.post('/add_schedule', (req, res) =>{
                 topic: newtopic,
                 amcom: newamcom,
                 pmcom: newpmcom
-        
             });
             schedule.save()
             .then((result) =>{
@@ -91,10 +90,6 @@ app.post('/add_schedule', (req, res) =>{
     .catch((err) => {
        console.log(err);
     });
-   
-    
-    
-    
 });
 
 
