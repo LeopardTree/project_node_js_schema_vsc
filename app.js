@@ -50,28 +50,55 @@ app.use(function (req, res, next) {
 
 // mongoose and mongo sandbox routes
 app.post('/add_schedule', (req, res) =>{
-    newdate = req.body.dateInput;
-    newloc = req.body.locationInput;
-    newteacher1 = req.body.teacher1Input;
-    newam = req.body.amInput;
-    newpm = req.body.pmInput;
-    newcourse = req.body.courseInput;
-    const schedule = new Schedule({
-        date: newdate,
-        location: newloc,
-        am: newam,
-        pm: newpm,
-        teacher1: newteacher1,
-        course: newcourse
-    });
-    schedule.save()
-    .then((result) =>{
-        res.send(result)
+    let newdate = req.body.dateInput;
+    let newloc = req.body.locationInput;
+    let newteacher1 = req.body.teacher1Input;
+    let newam = req.body.amInput;
+    let newpm = req.body.pmInput;
+    let newcourse = req.body.courseInput;
+    let newteacher2 = req.body.teacher2Input;
+    let newtopic = req.body.topicInput;
+    let newamcom = req.body.amcomInput;
+    let newpmcom = req.body.pmcomInput;
+    let changedoc = "";
+    let yesno = "";
+
+    newarr = [newloc, newteacher1, newam, newpm, newcourse, newteacher2, newtopic, newamcom, newpmcom];
+    
+    // check if date already exists
+    Schedule.findOne({ date: newdate })
+    .then(doc =>{
+        if(doc == null){
+            const schedule = new Schedule({
+                date: newdate,
+                location: newloc,
+                am: newam,
+                pm: newpm,
+                teacher1: newteacher1,
+                course: newcourse,
+                teacher2: newteacher2,
+                topic: newtopic,
+                amcom: newamcom,
+                pmcom: newpmcom
+        
+            });
+            schedule.save()
+            .then((result) =>{
+                res.send(result)
+            })
+            .catch((err) => {
+                console.log(err);
+                res.redirect('add_schedule');
+            });
+        }
     })
     .catch((err) => {
-        console.log(err);
+       console.log(err);
     });
-    //res.send(newdate+ " "+ newloc+ " "+newteacher1+" "+ newam + " " + newpm + " " + newcourse)
+   
+    
+    
+    
 });
 
 
