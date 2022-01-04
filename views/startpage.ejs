@@ -12,7 +12,7 @@ background-image: url("img/background_forest_gray.jfif");
 <body>
 
     <h1 id="font" style="margin-top: 3px" ;>Schema MJU20</h1>
-    <!-- <span id='date-time'></span> -->
+    <!-- <span id='date-time'></span> -->   
     <p id="font" style="font-size: 175%;"><%= text4%></p>
     <p id="font" style="font-size: 140%;"><%= text%></p>
     <form action="" method="post">
@@ -55,6 +55,18 @@ background-image: url("img/background_forest_gray.jfif");
         <label for="comment2">Kommentar</label>
         <input type="text" id="comment2" name="commentInput2">
     </form>
+
+    <!--RegisterButton-->
+    <div class="register-button">
+        <a href="http://localhost:3000/register">
+            <button>Register</button></a>
+    </div>
+
+    <!--LoginButton-->
+    <div class="login-button">
+        <a href="http://localhost:3000/login">
+            <button>Login</button></a>
+    </div>
 
     <!--https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil-->
 
