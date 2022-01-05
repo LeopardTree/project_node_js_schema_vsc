@@ -15,11 +15,12 @@ var place = "";
 var am = "";
 var pm = "";
 var left = ""; right = "";
-
-var x = "";
+var dtObject = "";
+var week = "";
+var day = "";
+var dtstr = "";
 if (typeof dt === 'undefined') {
     dt = new Date();
-    dt = dt.toLocaleDateString();
     }
 var dt = selectDate();
 
@@ -42,9 +43,14 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 
 // middleware
 app.use(function (req, res, next) {
-    
-    // dayview = findInDb();
     dt = selectDate(dt);
+    dtstr = new Date(dt).toLocaleDateString();
+    //dtObject = toDateObject(dt);
+    week = new Date(dt).getWeek();
+    //gets the daynumber in the week sunday = 0 --> saturday = 6
+    day = new Date(dt).getDay();
+    console.log(new Date(dt));
+    // dayview = findInDb();
     next()
 });
 
@@ -64,7 +70,9 @@ app.post('/add_schedule', (req, res) =>{
     newarr = [newloc, newteacher1, newam, newpm, newcourse, newteacher2, newtopic, newamcom, newpmcom];
     
     // check if date already exists
-    Schedule.findOne({ date: newdate })
+    Schedule.findOne({ date: { $gte: new Date(newdate), $lt: new Date(addDay(dt))
+        }
+    })
     .then(doc =>{
         if(doc == null){
             const schedule = new Schedule({
@@ -110,9 +118,12 @@ app.post('/', function(req, res) {
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+
 //app.gets
 app.get('/', (req, res) => {
-    Schedule.findOne({ date: dt })
+    Schedule.findOne({ date: { $gte: new Date(dt), $lt: new Date(addDay(dt))
+            }
+        })
     .then(doc =>{
         if(doc != null){
             am = doc.am;
@@ -125,7 +136,7 @@ app.get('/', (req, res) => {
             place = "";
         }
         // res.send(am + pm + place);
-        res.render('startpage', { text: place, text2: am, text3: pm, text4: dt, text5: '', text6: ''});
+        res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comAmOut: '', comPmOut: ''});
     })
     .catch((err) => {
        console.log(err);
@@ -136,15 +147,30 @@ app.get('/add_schedule', (req, res) => {
 });
 
 app.get('/vecka', (req, res) => {
-    res.render('vecka', {text4: dt, text: place})
+    var boundaries = findBoundarydates();
+    Schedule.find({ date: { $gte: new Date(boundaries[0]), $lt: new Date(boundaries[1])
+        }
+    })
+    .then(doc =>{
+        
+        // res.send(am + pm + place);
+        res.send(doc);
+    })
+    .catch((err) => {
+       console.log(err);
+    });
+
+
+
+    //res.render('vecka', {dateOut: week, placeOut: place})
 });
 
 app.get('/register', (req, res) => {
-    res.render('register', {text4: dt, text: place})
+    res.render('register', {dateOut: dtstr, placeOut: place})
 });
 
 app.get('/login', (req, res) => {
-    res.render('login', {text4: dt, text: place})
+    res.render('login', {dateOut: dtstr, placeOut: place})
 });
 
 // functions
@@ -153,14 +179,12 @@ app.get('/login', (req, res) => {
 // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
 function addDay(date) {
     var result = new Date(date);
-    result.setDate(result.getDate() + 1);
-    result = result.toLocaleDateString();
+    result = result.setDate(result.getDate() + 1);
     return result;
 }
 function previousDay(date){
     var result = new Date(date);
-    result.setDate(result.getDate() - 1);
-    result = result.toLocaleDateString();
+    result = result.setDate(result.getDate() - 1);
     return result;
 }
 function selectDate(){
@@ -173,4 +197,45 @@ function selectDate(){
         right = "false";
     }
     return dt;
+}
+// https://weeknumber.com/how-to/javascript
+// Returns the ISO week of the date.
+Date.prototype.getWeek = function() {
+    var date = new Date(this.getTime());
+    date.setHours(0, 0, 0, 0);
+    // Thursday in current week decides the year.
+    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+    // January 4 is always in week 1.
+    var week1 = new Date(date.getFullYear(), 0, 4);
+    // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
+                          - 3 + (week1.getDay() + 6) % 7) / 7);
+  }
+function toDateObject(dt){
+    var timestamp = Date.parse(dt);
+    return new Date(timestamp);
+}
+function findBoundarydates(){
+    let tempmon = dt;
+    let tempsat = "";
+    if(day == 1){
+        tempmon = new Date(tempmon);
+    }
+    if(day == 2){
+        tempmon = tempmon.setDate(tempmon.getDate() - 1);
+        
+    }
+    if(day == 3){
+        tempmon =  tempmon.setDate(tempmon.getDate() - 2);
+    }
+    if(day == 4){
+        tempmon = tempmon.setDate(tempmon.getDate() - 3);
+    }
+    if(day == 5){
+        tempmon = tempmon.setDate(tempmon.getDate() - 4);
+    }
+    tempsat = new Date(tempmon);
+    tempsat = tempsat.setDate(tempsat.getDate() + 4);
+
+    return [tempmon, tempsat];
 }

@@ -139,5 +139,10 @@
     width: 3%;
     display: inline-block;
 }
+.week-button {
+    background-color: red;
+    width: 3%;
+    display: inline-block;
+}
 
 

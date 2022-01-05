@@ -13,8 +13,8 @@ background-image: url("img/background_forest_gray.jfif");
 
     <h1 id="font" style="margin-top: 3px" ;>Schema MJU20</h1>
     <!-- <span id='date-time'></span> -->   
-    <p id="font" style="font-size: 175%;"><%= text4%></p>
-    <p id="font" style="font-size: 140%;"><%= text%></p>
+    <p id="font" style="font-size: 175%;"><%= dateOut%></p>
+    <p id="font" style="font-size: 140%;"><%= placeOut%></p>
     <form action="" method="post">
         <button id="button1" name="left" value="true" style="left: 685px; top: 74px;"><</button>
     </form>
@@ -33,17 +33,17 @@ background-image: url("img/background_forest_gray.jfif");
     </div>
     <!--Lesson Blocks-->
     <div id="wrapper">
-        <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text2%>
+        <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= amOut%>
             <textarea placeholder="..." style="position: absolute; top: 20%; width: 95%; left: 2%; height: 70%; background-color: burlywood; border: none; resize: none;">
-                <%= text5%>
+                <%= comAmOut%>
             </textarea>
         </div>
         <div id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> Lunch 
             
         </div>
-        <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= text3%>
+        <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= pmOut%>
             <textarea placeholder="..." style="position: absolute; top: 20%; width: 95%; left: 2%; height: 70%; background-color: burlywood; border: none; resize: none;">
-                <%= text6%>
+                <%= comPmOut%>
             </textarea>
         </div>
     </div>
@@ -67,10 +67,15 @@ background-image: url("img/background_forest_gray.jfif");
         <a href="http://localhost:3000/login">
             <button>Login</button></a>
     </div>
+    <!-- WeekButton -->
+    <div class="week-button">
+        <a href="http://localhost:3000/vecka">
+            <button>Vecka</button></a>
+    </div>
 
     <!--https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil-->
 
-    <h2 style="display:none;" id="uid"><%=text4 %></h2>
+    <h2 style="display:none;" id="uid"><%=dateOut%></h2>
     <script type="text/javascript">
             var dateShowing = document.getElementById('uid').innerHTML; 
             // alert(x);  // now JS variable 'x' has the uid that's passed from the node backend.
