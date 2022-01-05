@@ -47,13 +47,26 @@ background-image: url("img/background_forest_gray.jfif");
             </textarea>
         </div>
     </div>
+    <div class="comments content">
+        <h2>comments</h2>
+
+        <% if (comments.length > 0 ) { %>
+            <% comments.forEach(comment => { %>
+
+                <p id="font" style="font-size: 80%;"><%=comment.text %> </p>
+
+            <%})%>
+        <% } %>
+
+
+    </div>
     <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
         <label for="comment1">Kommentar</label>
-        <input type="text" id="comment1" name="commentInput">
+        <input type="text" id="comment1" name="amcomInp">
     </form>
     <form name="form2" action="" method="post" id="userInput" style="width: 600px;" >
         <label for="comment2">Kommentar</label>
-        <input type="text" id="comment2" name="commentInput2">
+        <input type="text" id="comment2" name="pmcomInp">
     </form>
 
     <!--RegisterButton-->

@@ -20,6 +20,8 @@ var week = "";
 var day = "";
 var dtstr = "";
 var amMon, pmMon, amTue, pmTue, amWed, pmWed, amThu, pmThu, amFri, pmFri;
+var commentsArrAm = [];
+var commentsArrPm = [];
 if (typeof dt === 'undefined') {
     dt = new Date();
     }
@@ -48,7 +50,23 @@ app.use(function (req, res, next) {
     next()
 });
 
-// mongoose and mongo sandbox routes
+// problem with assigning variable to document_object because of async... so using findOne directly in app.get for now 
+// async function findInDb(){
+//     x = await Schedule.find();
+// }
+//app.posts
+app.post('/', function(req, res) {
+    left = req.body.left,
+    right = req.body.right;
+    let newDate = new Date().toLocaleString();
+    let commentAm = req.body.amcomInp;
+    commentsArrAm.push({text: commentAm, time: newDate});
+    let commentPm = req.body.pmcomInp;
+    commentsArrPm.push({text: commentPm, time: newDate});
+
+    res.redirect('/');
+});
+
 app.post('/add_schedule', (req, res) =>{
     let newdate = req.body.dateInput;
     let newloc = req.body.locationInput;
@@ -97,17 +115,6 @@ app.post('/add_schedule', (req, res) =>{
 });
 
 
-// problem with assigning variable to document_object because of async... so using findOne directly in app.get for now 
-// async function findInDb(){
-//     x = await Schedule.find();
-// }
-//app.posts
-app.post('/', function(req, res) {
-    left = req.body.left,
-    right = req.body.right;
-    res.redirect('/');
-});
-
 // Set Views
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -131,8 +138,8 @@ app.get('/', (req, res) => {
             pm = "";
             place = "";
         }
-        // res.send(am + pm + place);
-        res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comAmOut: '', comPmOut: ''});
+        
+        res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comAmOut: '', comPmOut: '', comments: commentsArrAm});
     })
     .catch((err) => {
        console.log(err);
