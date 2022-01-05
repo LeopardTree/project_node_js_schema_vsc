@@ -22,8 +22,8 @@ var dtstr = "";
 if (typeof dt === 'undefined') {
     dt = new Date();
     }
-var dt = selectDate();
-
+var tempmon = new Date(dt);
+var tempsat = "";
 // connect to mongoDb and then listen to port
 const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -43,14 +43,7 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 
 // middleware
 app.use(function (req, res, next) {
-    dt = selectDate(dt);
-    dtstr = new Date(dt).toLocaleDateString();
-    //dtObject = toDateObject(dt);
-    week = new Date(dt).getWeek();
-    //gets the daynumber in the week sunday = 0 --> saturday = 6
-    day = new Date(dt).getDay();
-    console.log(new Date(dt));
-    // dayview = findInDb();
+    
     next()
 });
 
@@ -121,7 +114,9 @@ app.set('view engine', 'ejs');
 
 //app.gets
 app.get('/', (req, res) => {
-    Schedule.findOne({ date: { $gte: new Date(dt), $lt: new Date(addDay(dt))
+    dt = selectDate(dt);
+    dtstr = new Date(dt).toLocaleDateString();
+    Schedule.findOne({ date: { $gte: new Date(dtstr), $lt: new Date(addDay(dtstr))
             }
         })
     .then(doc =>{
@@ -147,8 +142,16 @@ app.get('/add_schedule', (req, res) => {
 });
 
 app.get('/vecka', (req, res) => {
-    var boundaries = findBoundarydates();
-    Schedule.find({ date: { $gte: new Date(boundaries[0]), $lt: new Date(boundaries[1])
+    week = new Date(dt).getWeek();
+    //gets the daynumber in the week sunday = 0 --> saturday = 6
+    day = new Date(dt).getDay();
+    findBoundarydates();
+    tempmon = new Date(tempmon).toLocaleDateString();
+    tempsat = new Date(tempsat).toLocaleDateString();
+
+    Schedule.find({date: {
+        $gte: tempmon, 
+        $lt: tempsat
         }
     })
     .then(doc =>{
@@ -159,10 +162,12 @@ app.get('/vecka', (req, res) => {
     .catch((err) => {
        console.log(err);
     });
-
+    tempmon = new Date(dt);
+    tempsat = "";
 
 
     //res.render('vecka', {dateOut: week, placeOut: place})
+
 });
 
 app.get('/register', (req, res) => {
@@ -216,14 +221,9 @@ function toDateObject(dt){
     return new Date(timestamp);
 }
 function findBoundarydates(){
-    let tempmon = dt;
-    let tempsat = "";
-    if(day == 1){
-        tempmon = new Date(tempmon);
-    }
+    tempmon = new Date(tempmon);
     if(day == 2){
         tempmon = tempmon.setDate(tempmon.getDate() - 1);
-        
     }
     if(day == 3){
         tempmon =  tempmon.setDate(tempmon.getDate() - 2);
@@ -235,7 +235,5 @@ function findBoundarydates(){
         tempmon = tempmon.setDate(tempmon.getDate() - 4);
     }
     tempsat = new Date(tempmon);
-    tempsat = tempsat.setDate(tempsat.getDate() + 4);
-
-    return [tempmon, tempsat];
+    tempsat = tempsat.setDate(tempsat.getDate() + 5);
 }
