@@ -19,6 +19,7 @@ var dtObject = "";
 var week = "";
 var day = "";
 var dtstr = "";
+var amMon, pmMon, amTue, pmTue, amWed, pmWed, amThu, pmThu, amFri, pmFri;
 if (typeof dt === 'undefined') {
     dt = new Date();
     }
@@ -142,6 +143,7 @@ app.get('/add_schedule', (req, res) => {
 });
 
 app.get('/vecka', (req, res) => {
+    
     week = new Date(dt).getWeek();
     //gets the daynumber in the week sunday = 0 --> saturday = 6
     day = new Date(dt).getDay();
@@ -154,20 +156,44 @@ app.get('/vecka', (req, res) => {
         $lt: tempsat
         }
     })
-    .then(doc =>{
+    .then(days =>{
         
-        // res.send(am + pm + place);
-        res.send(doc);
+        days.forEach(day => {
+            let weekday = new Date(day.date).getDay();
+            if(weekday == 1){
+                amMon = day.am;
+                pmMon = day.pm;
+            }
+            if(weekday == 2){
+                amTue = day.am;
+                pmTue = day.pm;
+            }
+            if(weekday == 3){
+                amWed = day.am;
+                pmWed = day.pm;
+            }
+            if(weekday == 4){
+                amThu = day.am;
+                pmThu = day.pm;
+            }
+            if(weekday == 5){
+                amThu = day.am;
+                pmThu = day.pm;
+            }
+
+            
+        });
+        //res.send(doc);
     })
     .catch((err) => {
        console.log(err);
     });
     tempmon = new Date(dt);
     tempsat = "";
-
-
-    //res.render('vecka', {dateOut: week, placeOut: place})
-
+    res.render('vecka', {weekOut: week, 
+        amMonOut: amMon, pmMonOut: pmMon, amTueOut: amTue, pmTueOut: pmTue, amWedOut: amWed, pmWedOut: pmWed, 
+        amThuOut: amThu, pmThuOut: pmThu, amFriOut: amFri, pmFriOut: pmFri
+    });
 });
 
 app.get('/register', (req, res) => {
