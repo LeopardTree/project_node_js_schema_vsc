@@ -180,8 +180,14 @@ app.get('/vecka', (req, res) => {
                 amThu = day.am;
                 pmThu = day.pm;
             }
-
+            tempmon = new Date(dt);
+            tempsat = "";
             
+            
+        });
+        res.render('vecka', {weekOut: week, 
+            amMonOut: amMon, pmMonOut: pmMon, amTueOut: amTue, pmTueOut: pmTue, amWedOut: amWed, pmWedOut: pmWed, 
+            amThuOut: amThu, pmThuOut: pmThu, amFriOut: amFri, pmFriOut: pmFri
         });
         //res.send(doc);
         tempmon = new Date(dt);
@@ -195,6 +201,10 @@ app.get('/vecka', (req, res) => {
        console.log(err);
     });
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 92d83f662981946cbc9983025d9e2d862f586660
 });
 
 app.get('/register', (req, res) => {
@@ -248,7 +258,7 @@ function toDateObject(dt){
     return new Date(timestamp);
 }
 function findBoundarydates(){
-    tempmon = new Date(tempmon);
+    tempmon = new Date(dt);
     if(day == 2){
         tempmon = tempmon.setDate(tempmon.getDate() - 1);
     }
