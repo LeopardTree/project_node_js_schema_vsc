@@ -19,7 +19,7 @@ var dtObject = "";
 var week = "";
 var day = "";
 var dtstr = "";
-var amMon, pmMon, amTue, pmTue, amWed, pmWed, amThu, pmThu, amFri, pmFri;
+var amMon, pmMon, amTue, pmTue, amWed, pmWed, amThu, pmThu, amFri, pmFri, locMon, locTue, locWed, locThu, locFri;
 if (typeof dt === 'undefined') {
     dt = new Date();
     }
@@ -163,22 +163,27 @@ app.get('/vecka', (req, res) => {
             if(weekday == 1){
                 amMon = day.am;
                 pmMon = day.pm;
+                locMon = day.location;
             }
             if(weekday == 2){
                 amTue = day.am;
                 pmTue = day.pm;
+                locTue = day.location;
             }
             if(weekday == 3){
                 amWed = day.am;
                 pmWed = day.pm;
+                locWed = day.location;
             }
             if(weekday == 4){
                 amThu = day.am;
                 pmThu = day.pm;
+                locThu = day.location;
             }
             if(weekday == 5){
-                amThu = day.am;
-                pmThu = day.pm;
+                amFri = day.am;
+                pmFri = day.pm;
+                locFri = day.location;
             }
             tempmon = new Date(dt);
             tempsat = "";
@@ -187,24 +192,16 @@ app.get('/vecka', (req, res) => {
         });
         res.render('vecka', {weekOut: week, 
             amMonOut: amMon, pmMonOut: pmMon, amTueOut: amTue, pmTueOut: pmTue, amWedOut: amWed, pmWedOut: pmWed, 
-            amThuOut: amThu, pmThuOut: pmThu, amFriOut: amFri, pmFriOut: pmFri
+            amThuOut: amThu, pmThuOut: pmThu, amFriOut: amFri, pmFriOut: pmFri, locMonOut: locMon, locTueOut: locTue, locWedOut: locWed, locThuOut: locThu, locFriOut: locFri
         });
         //res.send(doc);
-        tempmon = new Date(dt);
-        tempsat = "";
-        res.render('vecka', {weekOut: week, 
-        amMonOut: amMon, pmMonOut: pmMon, amTueOut: amTue, pmTueOut: pmTue, amWedOut: amWed, pmWedOut: pmWed, 
-        amThuOut: amThu, pmThuOut: pmThu, amFriOut: amFri, pmFriOut: pmFri
-    });
+        
     })
     .catch((err) => {
        console.log(err);
     });
     
-<<<<<<< HEAD
-=======
     
->>>>>>> 92d83f662981946cbc9983025d9e2d862f586660
 });
 
 app.get('/register', (req, res) => {
