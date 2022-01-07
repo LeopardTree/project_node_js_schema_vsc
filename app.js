@@ -184,16 +184,17 @@ app.get('/vecka', (req, res) => {
             
         });
         //res.send(doc);
+        tempmon = new Date(dt);
+        tempsat = "";
+        res.render('vecka', {weekOut: week, 
+        amMonOut: amMon, pmMonOut: pmMon, amTueOut: amTue, pmTueOut: pmTue, amWedOut: amWed, pmWedOut: pmWed, 
+        amThuOut: amThu, pmThuOut: pmThu, amFriOut: amFri, pmFriOut: pmFri
+    });
     })
     .catch((err) => {
        console.log(err);
     });
-    tempmon = new Date(dt);
-    tempsat = "";
-    res.render('vecka', {weekOut: week, 
-        amMonOut: amMon, pmMonOut: pmMon, amTueOut: amTue, pmTueOut: pmTue, amWedOut: amWed, pmWedOut: pmWed, 
-        amThuOut: amThu, pmThuOut: pmThu, amFriOut: amFri, pmFriOut: pmFri
-    });
+    
 });
 
 app.get('/register', (req, res) => {

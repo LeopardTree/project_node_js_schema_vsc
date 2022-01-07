@@ -6,97 +6,114 @@
 background-image: url("img/background_forest_gray.jfif");
 }
 </style>
-<link rel="stylesheet" href="css/week.css">
-<title>OOP2 Schema</title>
+<link rel="stylesheet" href="css/newweek.css">
 </head>
 <body>
-  <!-- let locals = {weekOut: week,  
-    amMonOut: "", pmMonOut: "", amTueOut: "", pmTueOut: "", amWedOut: "", pmWedOut: "", amThuOut: "", pmThuOut: "", amFriOut: "", pmFriOut: ""}; -->
-    <h1>Schema MJU20</h1>
-    <p id="p1" style="font-size: 175%;">vecka <%= weekOut%></p>
-    
-    <!--Monday Column-->
-    <div class="row">
-        <div class="column left">
-            <h2>Förmiddag</h2>
-            <p><%= amMonOut%></p>
-          </div>
-          <div class="column middle" style="background-color:#ff5f5f">
-            <h2>Lunch</h2>
-            <p> </p>
-          </div>
-          <div class="column right">
-            <h2>Eftermiddag</h2>
-            <p><%= pmMonOut%></p>
-          </div>
-      </div>
+	<h1>vecka <%= weekOut%></h1>
+    <br>
+    <br>
+    <br>
+	<table border="1" cellspacing="0" align="center">
+		<!--<caption>Timetable</caption>-->
+		<tr>
+			<td align="center" height="80"
+				width="100"><br>
+				<b>Day/Period</b></br>
+			</td>
+			<td align="center" height="80"
+				width="350">
+				<b>09:00 - 12:00</b>
+			</td>
+            <td rowspan="6" align="center" height="80" width="85">
+                <h2>L<br>U<br>N<br>C<br>H</h2>
+            </td>
+            <td align="center" height="80"
+				width="350">
+				<b>13:00 - 16:30</b>
+			</td>
+            <td align="center" height="80"
+				width="100">
+				<b>Lokal</b>
+			</td>
+            <tr>
+                <td align="center" height="80">
+                    <b>Måndag</b>
+                </td>
+                <td colspan="1" align="center" 
+                    height="80"><%= amMonOut%>
+                </td>
+                <td align="center" height="80">
+                    LAB
+                </td>
+                <td align="center" height="80" width="85">
+                    <b>Distans</b>
+                </td>
+                
+            </tr>
 
-      
-      <!--Tuesday Column-->
-      <div class="row" style="margin-top: 8.6%;">
-        <div class="column left">
-            <h2>Förmiddag</h2>
-            <p><%= amTueOut%></p>
-          </div>
-          <div class="column middle" style="background-color:#ff5f5f;">
-            <h2>Lunch</h2>
-            <p> </p>
-          </div>
-          <div class="column right">
-            <h2>Eftermiddag</h2>
-            <p><%= pmTueOut%></p>
-          </div>
-      </div>
+            <tr>
+                <td align="center" height="80">
+                    <b>Tisdag</b>
+                </td>
+                <td colspan="1" align="center" 
+                    height="80">Eget Arbete
+                </td>
+                <td align="center" height="80">
+                    LAB
+                </td>
+                <td align="center" height="80" width="85">
+                    <b>Distans</b>
+                </td>
+            </tr>
 
-      
-      <!--Wednesday Column-->
-      <div class="row" style="margin-top: 15.5%;">
-        <div class="column left">
-            <h2>Förmiddag</h2>
-            <p><%= amWedOut%></p>
-          </div>
-          <div class="column middle" style="background-color:#ff5f5f;">
-            <h2>Lunch</h2>
-            <p> </p>
-          </div>
-          <div class="column right">
-            <h2>Eftermiddag</h2>
-            <p><%= pmWedOut%></p>
-          </div>
-      </div>
+            <tr>
+                <td align="center" height="80">
+                    <b>Onsdag</b>
+                </td>
+                <td colspan="1" align="center" 
+                    height="80">Eget Arbete
+                </td>
+                <td align="center" height="80">
+                    LAB
+                </td>
+                <td align="center" height="80" width="85">
+                    <b>Distans</b>
+                </td>   
+            </tr>
 
+            <tr>
+                <td align="center" height="80">
+                    <b>Torsdag</b>
+                </td>
+                <td colspan="1" align="center" 
+                    height="80">Eget Arbete
+                </td>
+                <td align="center" height="80">
+                    LAB
+                </td>
+                <td align="center" height="80" width="85">
+                    <b>Distans</b>
+                </td>
+            </tr>
 
-      <!--Thursday Column-->
-      <div class="row" style="margin-top: 22.5%;">
-        <div class="column left">
-            <h2>Förmiddag</h2>
-            <p><%= amThuOut%></p>
-          </div>
-          <div class="column middle" style="background-color:#ff5f5f;">
-            <h2>Lunch</h2>
-            <p> </p>
-          </div>
-          <div class="column right">
-            <h2>Eftermiddag</h2>
-            <p><%= pmThuOut%></p>
-          </div>
-      </div>
-
-
-      <!--Friday Column-->
-      <div class="row" style="margin-top: 29.5%;">
-        <div class="column left">
-            <h2>Förmiddag</h2>
-            <p><%= amFriOut%></p>
-          </div>
-          <div class="column middle" style="background-color:#ff5f5f;">
-            <h2>Lunch</h2>
-            <p> </p>
-          </div>
-          <div class="column right">
-            <h2>Eftermiddag</h2>
-            <p><%= pmFriOut%></p>
-          </div>
-      </div>
-
+            <tr>
+                <td align="center" height="80">
+                    <b>Fredag</b>
+                </td>
+                <td colspan="1" align="center" 
+                    height="80">Eget Arbete
+                </td>
+                <td align="center" height="80">
+                    LAB
+                </td>
+                <td align="center" height="80" width="85">
+                    <b>Distans</b>
+                </td>
+            </tr>
+           
+			
+			
+	</table>
 </body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+background-image: url("img/background_forest_gray.jfif");
+}
+</style>
+<link rel="stylesheet" href="css/week.css">
+<title>OOP2 Schema</title>
+</head>
+<body>
+  <!-- let locals = {weekOut: week,  
+    amMonOut: "", pmMonOut: "", amTueOut: "", pmTueOut: "", amWedOut: "", pmWedOut: "", amThuOut: "", pmThuOut: "", amFriOut: "", pmFriOut: ""}; -->
+    <h1>Schema MJU20</h1>
+    <p id="p1" style="font-size: 175%;">vecka <%= weekOut%></p>
+    
+    <!--Monday Column-->
+    <div class="row">
+        <div class="column left">
+            <h2>Förmiddag</h2>
+            <p><%= amMonOut%></p>
+          </div>
+          <div class="column middle" style="background-color:#ff5f5f">
+            <h2>Lunch</h2>
+            <p> </p>
+          </div>
+          <div class="column right">
+            <h2>Eftermiddag</h2>
+            <p><%= pmMonOut%></p>
+          </div>
+      </div>
+
+      
+      <!--Tuesday Column-->
+      <div class="row" style="margin-top: 8.6%;">
+        <div class="column left">
+            <h2>Förmiddag</h2>
+            <p><%= amTueOut%></p>
+          </div>
+          <div class="column middle" style="background-color:#ff5f5f;">
+            <h2>Lunch</h2>
+            <p> </p>
+          </div>
+          <div class="column right">
+            <h2>Eftermiddag</h2>
+            <p><%= pmTueOut%></p>
+          </div>
+      </div>
+
+      
+      <!--Wednesday Column-->
+      <div class="row" style="margin-top: 15.5%;">
+        <div class="column left">
+            <h2>Förmiddag</h2>
+            <p><%= amWedOut%></p>
+          </div>
+          <div class="column middle" style="background-color:#ff5f5f;">
+            <h2>Lunch</h2>
+            <p> </p>
+          </div>
+          <div class="column right">
+            <h2>Eftermiddag</h2>
+            <p><%= pmWedOut%></p>
+          </div>
+      </div>
+
+
+      <!--Thursday Column-->
+      <div class="row" style="margin-top: 22.5%;">
+        <div class="column left">
+            <h2>Förmiddag</h2>
+            <p><%= amThuOut%></p>
+          </div>
+          <div class="column middle" style="background-color:#ff5f5f;">
+            <h2>Lunch</h2>
+            <p> </p>
+          </div>
+          <div class="column right">
+            <h2>Eftermiddag</h2>
+            <p><%= pmThuOut%></p>
+          </div>
+      </div>
+
+
+      <!--Friday Column-->
+      <div class="row" style="margin-top: 29.5%;">
+        <div class="column left">
+            <h2>Förmiddag</h2>
+            <p><%= amFriOut%></p>
+          </div>
+          <div class="column middle" style="background-color:#ff5f5f;">
+            <h2>Lunch</h2>
+            <p> </p>
+          </div>
+          <div class="column right">
+            <h2>Eftermiddag</h2>
+            <p><%= pmFriOut%></p>
+          </div>
+      </div>
+
+</body>
