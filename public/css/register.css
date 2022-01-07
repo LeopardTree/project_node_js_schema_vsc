@@ -1,5 +1,6 @@
   .container {  
-    padding: 50px;  
+      padding: 50px;  
+    
   }  
     
   input[type=text], input[type=password], textarea {  
@@ -8,17 +9,16 @@
     margin: 5px 0 22px 0;  
     display: inline-block;  
     border: none;  
-    background: #f5f5f5;  
-  } 
-
+    background: #f5f5f5;
+    
+  }  
   input[type=text]:focus, input[type=password]:focus {  
     background-color: burlywood;  
     outline: none;  
   }  
    div {  
-    padding: 10px 0;  
-    }
-
+              padding: 10px 0;  
+           }  
   hr {  
     border: 1px solid #f1f1f1;  
     margin-bottom: 25px;  
@@ -38,14 +38,14 @@
     opacity: 1;  
   }
 
-  label {
-    color: burlywood;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  label{
+      color: burlywood;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
-  h1 {
-    color: burlywood;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  h1{
+      color: burlywood;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
   .center-form {
@@ -54,7 +54,7 @@
   }
 
   .above-form {
-    text-align: center;
-    color: burlywood;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      text-align: center;
+      color: burlywood;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }

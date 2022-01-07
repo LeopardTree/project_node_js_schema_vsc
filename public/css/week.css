@@ -1,0 +1,26 @@
+h1{
+  color: burlywood;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#p1 {
+  color: burlywood;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 25px;
+}
+
+.column {
+  float: left;
+  background-color: burlywood;
+  text-align: center;
+}
+
+.left, .right {
+    width: 40%;
+  }
+  
+  .middle {
+    width: 20%;
+  }

@@ -1,20 +1,19 @@
 button {   
     background-color: burlywood;   
     width: 100%;  
-    color: black;   
-    padding: 15px;   
-    margin: 10px 0px;   
-    border: none;   
-    cursor: pointer;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;   
-      }
-
+     color: black;   
+     padding: 15px;   
+     margin: 10px 0px;   
+     border: none;   
+     cursor: pointer;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;   
+      }   
 form {   
     margin-top: 60px; 
     border: 3px solid burlywood;
-    text-align: center;
-    background-color: lightslategray;
-    border-radius: 5%;   
+     text-align: center;
+     background-color: lightslategray;
+     border-radius: 5%;   
  }   
 input[type=text], input[type=password] {   
      width: 50%;   
@@ -23,8 +22,7 @@ input[type=text], input[type=password] {
      display: inline-block;   
      border: 2px solid burlywood;   
      box-sizing: border-box;   
- }
-
+ }  
 button:hover {   
      opacity: 0.7;   
  }      
@@ -40,14 +38,14 @@ button:hover {
   }
 
   .above-form {
-    text-align: center;
-    color: black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      text-align: center;
+      color: black;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
   h1 {
-    color: burlywood;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: burlywood;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
   
