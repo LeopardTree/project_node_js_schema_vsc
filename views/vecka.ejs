@@ -10,6 +10,12 @@ background-image: url("img/background_forest_gray.jfif");
 </head>
 <body>
 	<h1>vecka <%= weekOut%></h1>
+    <form action="" method="post">
+        <button id="button1" name="left" value="true" style="left: 685px; top: 74px;"><</button>
+    </form>
+    <form action="" method="post">
+        <button id="button2" name="right" value="true" style="left: 885px; top: 74px;">></button>
+    </form>
     <br>
     <br>
     <br>
@@ -114,6 +120,16 @@ background-image: url("img/background_forest_gray.jfif");
 			
 			
 	</table>
+    <script>
+        document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 37) {
+        document.getElementById("button1").click();
+    }
+    else if(event.keyCode == 39) {
+        document.getElementById("button2").click();
+    }
+    });
+    </script>
 </body>
 
 </html>

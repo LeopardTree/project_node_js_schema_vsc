@@ -15,8 +15,7 @@ var comment2 = "";
 var place = "";
 var am = "";
 var pm = "";
-var left = ""; right = "";
-var dtObject = "";
+var left = ""; var right = ""; var weekleft = ""; var weekright = "";
 var week = "";
 var day = "";
 var dtstr = "";
@@ -62,6 +61,13 @@ app.post('/', function(req, res) {
     left = req.body.left,
     right = req.body.right;
     res.redirect('/');
+});
+
+app.post('/vecka', function(req, res) {
+    weekleft = req.body.left;
+    weekright = req.body.right;
+    dt = jump7days(dt);
+    res.redirect('/vecka');
 });
 
 app.post('/register', function(req, res) {
@@ -186,7 +192,7 @@ app.get('/add_schedule', (req, res) => {
 });
 
 app.get('/vecka', (req, res) => {
-    
+    amMon = pmMon = amTue = pmTue = amWed = pmWed = amThu = pmThu = amFri = pmFri = locMon = locTue = locWed = locThu = locFri = "";
     week = new Date(dt).getWeek();
     //gets the daynumber in the week sunday = 0 --> saturday = 6
     day = new Date(dt).getDay();
@@ -263,12 +269,12 @@ app.get('/login', (req, res) => {
 // Functions for next or previous day
 // https://stackoverflow.com/questions/563406/add-days-to-javascript-date
 function addDay(date) {
-    var result = new Date(date);
+    let result = new Date(date);
     result = result.setDate(result.getDate() + 1);
     return result;
 }
 function previousDay(date){
-    var result = new Date(date);
+    let result = new Date(date);
     result = result.setDate(result.getDate() - 1);
     return result;
 }
@@ -282,6 +288,18 @@ function selectDate(){
         right = "false";
     }
     return dt;
+}
+function jump7days(){
+    let result = new Date(dt);
+    if(weekleft == "true"){
+        result = result.setDate(result.getDate() - 7);
+        weekleft = "false";
+    }
+    if(weekright == "true"){
+        result = result.setDate(result.getDate() + 7);
+        weekright = "false";
+    }
+    return result;
 }
 // https://weeknumber.com/how-to/javascript
 // Returns the ISO week of the date.
