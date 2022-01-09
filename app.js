@@ -7,6 +7,7 @@ const port = 3000;
 const fs = require('fs');
 const mongoose = require('mongoose');
 const Schedule = require('./models/schedule');
+const User = require('./models/userprofile')
 
 // variables
 var comment1 = "";
@@ -23,6 +24,7 @@ var amMon, pmMon, amTue, pmTue, amWed, pmWed, amThu, pmThu, amFri, pmFri, locMon
 if (typeof dt === 'undefined') {
     dt = new Date();
     }
+var email_in_db;
 var tempmon = new Date(dt);
 var tempsat = "";
 // connect to mongoDb and then listen to port
@@ -44,11 +46,64 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 
 // middleware
 app.use(function (req, res, next) {
-    
+    dt = selectDate(dt);
     next()
 });
 
-// mongoose and mongo sandbox routes
+
+
+
+// problem with assigning variable to document_object because of async... so using findOne directly in app.get for now 
+// async function findInDb(){
+//     x = await Schedule.find();
+// }
+//app.posts
+app.post('/', function(req, res) {
+    left = req.body.left,
+    right = req.body.right;
+    res.redirect('/');
+});
+
+app.post('/register', function(req, res) {
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let phone = req.body.phone;
+    let email = req.body.email;
+    let psw = req.body.psw;
+    // check if email already exists
+    Schedule.findOne({ email: email})
+        .then(doc =>{
+            if(doc == null){
+                const user = new User({
+                    firstname: firstname,
+                    lastname: lastname,
+                    phone: phone,
+                    email: email,
+                    psw: psw
+                    
+                });
+                user.save()
+                .then((result) =>{
+                    res.send(result)
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.redirect('/register');
+                });
+            }
+            else{
+                email_in_db = email;
+                res.redirect('/register_tryagain');
+            }
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+    
+    
+    //res.redirect('/');
+});
+
 app.post('/add_schedule', (req, res) =>{
     let newdate = req.body.dateInput;
     let newloc = req.body.locationInput;
@@ -96,18 +151,6 @@ app.post('/add_schedule', (req, res) =>{
     });
 });
 
-
-// problem with assigning variable to document_object because of async... so using findOne directly in app.get for now 
-// async function findInDb(){
-//     x = await Schedule.find();
-// }
-//app.posts
-app.post('/', function(req, res) {
-    left = req.body.left,
-    right = req.body.right;
-    res.redirect('/');
-});
-
 // Set Views
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -115,7 +158,7 @@ app.set('view engine', 'ejs');
 
 //app.gets
 app.get('/', (req, res) => {
-    dt = selectDate(dt);
+    
     dtstr = new Date(dt).toLocaleDateString();
     Schedule.findOne({ date: { $gte: new Date(dtstr), $lt: new Date(addDay(dtstr))
             }
@@ -205,11 +248,14 @@ app.get('/vecka', (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-    res.render('register', {dateOut: dtstr, placeOut: place})
+    res.render('register')
+});
+app.get('/register_tryagain', (req, res) => {
+    res.render('register_tryagain', {email: email_in_db})
 });
 
 app.get('/login', (req, res) => {
-    res.render('login', {dateOut: dtstr, placeOut: place})
+    res.render('login')
 });
 
 // functions
@@ -267,6 +313,12 @@ function findBoundarydates(){
     }
     if(day == 5){
         tempmon = tempmon.setDate(tempmon.getDate() - 4);
+    }
+    if(day == 6){
+        tempmon = tempmon.setDate(tempmon.getDate() - 5);
+    }
+    if(day == 0){
+        tempmon = tempmon.setDate(tempmon.getDate() - 6);
     }
     tempsat = new Date(tempmon);
     tempsat = tempsat.setDate(tempsat.getDate() + 5);
