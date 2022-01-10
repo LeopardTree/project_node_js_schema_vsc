@@ -84,6 +84,7 @@ app.post('/register', function(req, res) {
     // check if email already exists
     User.findOne({ email: newemail})
         .then(doc =>{
+            //must check if exists before saving new user because of it's asynchronous
             if(doc != null){
                 email_in_db = newemail;
                 res.redirect('/register_tryagain');
@@ -109,12 +110,33 @@ app.post('/register', function(req, res) {
             }
         })
         .catch((err) => {
-        console.log(err);
-        res.redirect('/');
+            console.log(err);
+            res.redirect('/');
         });
-    
-    
-    //res.redirect('/');
+});
+
+app.post('/login', function(req, res) {
+    let _email = req.body.email;
+    let _psw = req.body.password;
+    // check if email already exists
+    User.findOne({ email: _email})
+        .then(doc =>{
+            if(doc != null){
+                if(doc.psw == _psw){
+                    res.send('Log in successfull!')
+                }
+                else{
+                    res.send('wrong password')
+                }
+            }
+            else{
+                res.send("email doesn't exist");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.redirect('/');
+        });
 });
 
 app.post('/add_schedule', (req, res) =>{
