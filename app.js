@@ -26,6 +26,7 @@ if (typeof dt === 'undefined') {
 var email_in_db;
 var tempmon = new Date(dt);
 var tempsat = "";
+var loggedinUser = null;
 
 // connect to mongoDb and then listen to port
 const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
@@ -123,10 +124,17 @@ app.post('/login', function(req, res) {
         .then(doc =>{
             if(doc != null){
                 if(doc.psw == _psw){
-                    res.send('Log in successfull!')
+                    loggedinUser = doc;
+                    if(doc.admin == true){
+                        res.send('admin log in successful!');
+                    }
+                    else{
+                        res.send('log in successful!');
+                    }
+                    
                 }
                 else{
-                    res.send('wrong password')
+                    res.send('wrong password');
                 }
             }
             else{
@@ -135,7 +143,7 @@ app.post('/login', function(req, res) {
         })
         .catch((err) => {
             console.log(err);
-            res.redirect('/');
+            res.send('404');
         });
 });
 
@@ -217,7 +225,13 @@ app.get('/', (req, res) => {
     });
 });
 app.get('/add_schedule', (req, res) => {
-    res.render('addnewday');
+    if(loggedinUser && loggedinUser.admin == true){
+        res.render('addnewday');
+    }
+    else{
+        res.redirect('/');
+    }
+    
 });
 
 app.get('/vecka', (req, res) => {
