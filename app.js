@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const Schedule = require('./models/schedule');
 const User = require('./models/userprofile')
 
-// variables
+// global fields
 var comment1 = "";
 var comment2 = "";
 var place = "";
@@ -26,6 +26,7 @@ if (typeof dt === 'undefined') {
 var email_in_db;
 var tempmon = new Date(dt);
 var tempsat = "";
+
 // connect to mongoDb and then listen to port
 const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -71,21 +72,30 @@ app.post('/vecka', function(req, res) {
 });
 
 app.post('/register', function(req, res) {
-    let firstname = req.body.firstname;
-    let lastname = req.body.lastname;
-    let phone = req.body.phone;
-    let email = req.body.email;
-    let psw = req.body.psw;
+    let newfirstname = req.body.firstname;
+    let newlastname = req.body.lastname;
+    let newphone = req.body.phone;
+    let newemail = req.body.email;
+    let newpsw = req.body.psw;
+    let isadmin = false;
+    if(newemail.includes("@molk.com") || newemail.includes("@molk.se")){
+        isadmin = true;
+    }
     // check if email already exists
-    Schedule.findOne({ email: email})
+    User.findOne({ email: newemail})
         .then(doc =>{
-            if(doc == null){
+            if(doc != null){
+                email_in_db = newemail;
+                res.redirect('/register_tryagain');
+            }
+            else{
                 const user = new User({
-                    firstname: firstname,
-                    lastname: lastname,
-                    phone: phone,
-                    email: email,
-                    psw: psw
+                    firstname: newfirstname,
+                    lastname: newlastname,
+                    phone: newphone,
+                    email: newemail,
+                    psw: newpsw,
+                    admin: isadmin
                     
                 });
                 user.save()
@@ -94,16 +104,13 @@ app.post('/register', function(req, res) {
                 })
                 .catch((err) => {
                     console.log(err);
-                    res.redirect('/register');
+                    res.send(err);
                 });
-            }
-            else{
-                email_in_db = email;
-                res.redirect('/register_tryagain');
             }
         })
         .catch((err) => {
         console.log(err);
+        res.redirect('/');
         });
     
     
@@ -148,7 +155,7 @@ app.post('/add_schedule', (req, res) =>{
             })
             .catch((err) => {
                 console.log(err);
-                res.redirect('add_schedule');
+                res.send(err);
             });
         }
     })

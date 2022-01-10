@@ -21,6 +21,10 @@ const userSchema = new Schema({
     psw: {
         type: String,
         required: false
+    },
+    admin: {
+        type: Boolean,
+        required: true
     }
 }, {timestamps: true});
 
