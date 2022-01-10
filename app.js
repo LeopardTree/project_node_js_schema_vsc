@@ -306,6 +306,18 @@ app.get('/register_tryagain', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('login')
 });
+app.get('/all_users', (req, res) => {
+    User.find().sort({ lastname : -1})
+        .then(doc =>{
+            res.send(doc);
+           
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send('404');
+        });
+});
+
 
 // functions
 
