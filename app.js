@@ -7,7 +7,9 @@ const port = 3000;
 const fs = require('fs');
 const mongoose = require('mongoose');
 const Schedule = require('./models/schedule');
-const User = require('./models/userprofile')
+const User = require('./models/userprofile');
+const CommentAm = require('./models/usercommentAm');
+const CommentPm = require('./models/usercommentPm');
 
 // global fields
 var comment1 = "";
@@ -27,7 +29,7 @@ var email_in_db;
 var tempmon = new Date(dt);
 var tempsat = "";
 var loggedinUser = null;
-
+var amcomment = ""; var pmcomment = "";
 // connect to mongoDb and then listen to port
 const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -62,6 +64,25 @@ app.use(function (req, res, next) {
 app.post('/', function(req, res) {
     left = req.body.left,
     right = req.body.right;
+    amcomment = req.body.commentInput;
+    pmcomment = req.body.commentInput2;
+    if(amcomment && loggedinUser){
+        const _amcomment = new CommentAm({
+            date: new Date(),
+            username: email,
+            comment: amcomment,
+            
+        });
+        schedule.save()
+        .then((result) =>{
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
+    }
+
     res.redirect('/');
 });
 

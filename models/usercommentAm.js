@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const usercommentsAmSchema = new Schema({
+const usercommentAmSchema = new Schema({
     date: {
         type: String,
         required: true
@@ -15,3 +15,6 @@ const usercommentsAmSchema = new Schema({
         required = true
     }
 }, {timestamps: true});
+
+const CommentAm = mongoose.model('CommentAm', usercommentAmSchema);
+module.exports = CommentAm;
