@@ -19,7 +19,7 @@
 #div1{
     display: inline-block; 
     width: 41%; border-radius: 15px; 
-    block-size: 150px; 
+    block-size: 70px; 
     background-color: white; 
     margin-left: 1%; 
     text-align: center; 
@@ -45,7 +45,7 @@
     display: inline-block; 
     width: 15%; 
     border-radius: 15px;  
-    block-size: 150px; 
+    block-size: 70px; 
     background-color: white; 
     margin-left: 0.5%;
     text-align: center; 
@@ -56,6 +56,32 @@
 }
 
 #div3{
+    display: inline-block; 
+    width: 40.5%; 
+    border-radius: 15px; 
+    block-size: 70px; 
+    background-color: white; 
+    margin-left: 0.5%; 
+    text-align: center; 
+    background-color: burlywood; 
+    margin-top: 0.4%; 
+    position: absolute; 
+    left: 58%;
+}
+#div4{
+    display: inline-block; 
+    width: 40.5%; 
+    border-radius: 15px; 
+    block-size: 150px; 
+    background-color: white; 
+    margin-left: 0.5%; 
+    text-align: center; 
+    background-color: burlywood; 
+    margin-top: 0.4%; 
+    position: absolute; 
+    left: 58%;
+}
+#div5{
     display: inline-block; 
     width: 40.5%; 
     border-radius: 15px; 

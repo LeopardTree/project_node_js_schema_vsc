@@ -31,22 +31,39 @@ background-image: url("img/background_forest_gray.jfif");
         <div id="lunch" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%;"> 12:00 - 13:00 </div>
         <div id="lesson2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%;"> 13:00 - 16:30 </div>
     </div>
+
+    
     <!--Lesson Blocks-->
     <div id="wrapper">
         <div id="div1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= amOut%>
-            <textarea placeholder="..." style="position: absolute; top: 20%; width: 95%; left: 2%; height: 70%; background-color: burlywood; border: none; resize: none;">
-                <%= comAmOut%>
-            </textarea>
+            
         </div>
         <div id="div2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> Lunch 
             
         </div>
         <div id="div3" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 150%;"> <%= pmOut%>
-            <textarea placeholder="..." style="position: absolute; top: 20%; width: 95%; left: 2%; height: 70%; background-color: burlywood; border: none; resize: none;">
-                <%= comPmOut%>
-            </textarea>
+
         </div>
     </div>
+    <!-- Comments block -->
+
+    <div >
+        <h2>comments</h2>
+
+        <% if (comments.length > 0 ) { %>
+            <% comments.forEach(comment => { %>
+                <p id="font" style="font-size: 80%;"><%=comment.comment %> </p>
+            <%})%>
+        <% } %>
+
+
+    </div>
+
+
+
+    
+
+    <!-- Comment input block -->
     <div id="wrapper2" onshow="">
         <div id="lesson1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 100%;">
             <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
@@ -55,14 +72,8 @@ background-image: url("img/background_forest_gray.jfif");
             
         </form>
         </div>
-        <div id="lunch" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 150%;"> </div>
-        <div id="lesson2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 100%;">
-            <form name="form2" action="" method="post" id="userInput" style="width: 600px;" >
-
-                <input type="text" id="comment2" placeholder="Kommentar" name="commentInput2">
-            
-        </form>
-        </div>
+        
+        
     </div>
   
     
