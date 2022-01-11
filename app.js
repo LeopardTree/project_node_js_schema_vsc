@@ -292,8 +292,6 @@ app.get('/vecka', (req, res) => {
     .catch((err) => {
        console.log(err);
     });
-    
-    
 });
 
 app.get('/register', (req, res) => {
