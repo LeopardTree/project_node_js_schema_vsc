@@ -8,11 +8,11 @@ const usercommentPmSchema = new Schema({
     },
     username: {
         type: String,
-        required = true
+        required: true
     },
     comment: {
         type: String,
-        required = true
+        required: true
     }
 }, {timestamps: true});
 
