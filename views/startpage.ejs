@@ -16,11 +16,29 @@ background-image: url("img/background_forest_gray.jfif");
     <p id="font" style="font-size: 175%;"><%= dateOut%></p>
     <p id="font" style="font-size: 140%;"><%= placeOut%></p>
     <form action="" method="post">
-        <button id="button1" name="left" value="true" style="left: 685px; top: 74px;"><</button>
+        <button id="button1" name="left" value="true" style="left: 43%; top: 9.5%;"><</button>
     </form>
     <form action="" method="post">
         <button id="button2" name="right" value="true" style="left: 885px; top: 74px;">></button>
     </form>
+    
+    <div style="position: fixed; top: 2%;">
+            <div class="register-button">
+                <a href="http://localhost:3000/register">
+                    <button>Register</button></a>
+            </div>
+            <!--LoginButton-->
+            <div class="login-button">
+                <a href="http://localhost:3000/login">
+                    <button>Login</button></a>
+            </div>
+            <!-- WeekButton -->
+            <div class="week-button">
+                <a href="http://localhost:3000/vecka">
+                    <button>Vecka</button></a>
+            </div>
+        </div>
+    </div>
     <!-- <button name="left" value="true">Previous</button>
     <button name="right" value="true">Next</button> -->
     <div style="height: 160px;"></div>
@@ -56,22 +74,6 @@ background-image: url("img/background_forest_gray.jfif");
         <input type="text" id="comment2" name="commentInput2">
     </form>
 
-    <!--RegisterButton-->
-    <div class="register-button">
-        <a href="http://localhost:3000/register">
-            <button>Register</button></a>
-    </div>
-
-    <!--LoginButton-->
-    <div class="login-button">
-        <a href="http://localhost:3000/login">
-            <button>Login</button></a>
-    </div>
-    <!-- WeekButton -->
-    <div class="week-button">
-        <a href="http://localhost:3000/vecka">
-            <button>Vecka</button></a>
-    </div>
 
     <!--https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil-->
 

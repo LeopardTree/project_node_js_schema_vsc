@@ -111,7 +111,7 @@
     outline: none; 
     color: burlywood; 
     font-size: 150%; 
-    position: absolute;
+    position: fixed;
 }
 
 #button2{
@@ -123,25 +123,27 @@
     outline: none; 
     color: burlywood; 
     font-size: 150%; 
-    position: absolute;
+    position: fixed;
 }
 
 .register-button {
-    background-color: red;
     width: 4%;
-    margin-top: 11%;
     display: inline-block;
+    position: fixed;
+    
 }
 
 .login-button {
-    background-color: red;
     width: 3%;
     display: inline-block;
+    position: fixed;
+    left: 5%;
 }
 .week-button {
-    background-color: red;
     width: 3%;
     display: inline-block;
+    position: fixed;
+    right: 1%;
 }
 
 
