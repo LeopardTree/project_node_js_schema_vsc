@@ -7,7 +7,8 @@ const port = 3000;
 const fs = require('fs');
 const mongoose = require('mongoose');
 const Schedule = require('./models/schedule');
-const User = require('./models/userprofile')
+const User = require('./models/userprofile');
+const Comment = require('./models/usercomment');
 
 // global fields
 var comment1 = "";
@@ -27,7 +28,7 @@ var email_in_db;
 var tempmon = new Date(dt);
 var tempsat = "";
 var loggedinUser = null;
-
+var comment = ""; var comments = [];
 // connect to mongoDb and then listen to port
 const dbURI = 'mongodb+srv://schema_hemsida:julprojektoop2@schemamju20.5hgnt.mongodb.net/schemamju20?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -48,6 +49,7 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 // middleware
 app.use(function (req, res, next) {
     dt = selectDate(dt);
+    
     next()
 });
 
@@ -62,7 +64,24 @@ app.use(function (req, res, next) {
 app.post('/', function(req, res) {
     left = req.body.left,
     right = req.body.right;
-    res.redirect('/');
+    comment = req.body.commentInput;
+    if(typeof comment !== 'undefined' && loggedinUser){
+        const _comment = new Comment({
+            date: new Date(),
+            username: loggedinUser.email,
+            comment: comment,
+            firstname: loggedinUser.firstname,
+            lastname: loggedinUser.lastname
+        });
+        _comment.save()
+        .then((result) =>{
+            res.redirect('/');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
+    }
 });
 
 app.post('/vecka', function(req, res) {
@@ -126,10 +145,12 @@ app.post('/login', function(req, res) {
                 if(doc.psw == _psw){
                     loggedinUser = doc;
                     if(doc.admin == true){
-                        res.send('admin log in successful!');
+                        //res.send('admin log in successful!');
+                        res.redirect('/');
                     }
                     else{
-                        res.send('log in successful!');
+                        //res.send('log in successful!');
+                        res.redirect('/');
                     }
                     
                 }
@@ -199,9 +220,11 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 
-//app.gets
-app.get('/', (req, res) => {
+//app.gets // the async might not work properly...
+app.get('/', async (req, res) => {
     
+    comments = await Comment.find().exec();
+    console.log(comments);
     dtstr = new Date(dt).toLocaleDateString();
     Schedule.findOne({ date: { $gte: new Date(dtstr), $lt: new Date(addDay(dtstr))
             }
@@ -218,7 +241,7 @@ app.get('/', (req, res) => {
             place = "";
         }
         // res.send(am + pm + place);
-        res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comAmOut: '', comPmOut: ''});
+        res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comments: comments});
     })
     .catch((err) => {
        console.log(err);
