@@ -5,6 +5,36 @@
     body {
 background-image: url("img/background_forest_gray.jfif");
 }
+/* https://www.w3schools.com/howto/howto_css_chat.asp */
+.container {
+    border: 2px solid burlywood;
+    
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: lightslategray;
+    
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
 </style>
 <link rel="stylesheet" href="css/style.css">
 <title>OOP2 Schema</title>
@@ -63,36 +93,47 @@ background-image: url("img/background_forest_gray.jfif");
 
         </div>
     </div>
+
     <!-- Comments block -->
+    <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
 
-    <div >
-        <h2>comments</h2>
+        <input type="text" id="comment1" placeholder="Kommentar" name="commentInput" style="margin-right: 200px;">
+            
+    </form>
 
+    
+    <h2 ><FONT COLOR="lightslategray">Comments:</FONT></h2> 
+    </div>
+        <% var i = 0%>
         <% if (comments.length > 0 ) { %>
+            
             <% comments.forEach(comment => { %>
-                <p id="font" style="font-size: 80%;"><%=comment.comment %> </p>
-            <%})%>
+                <% if (i % 2 == 0){%>
+                    <div class="container"> 
+                        <span class="time-left"><%= comment.date.toLocaleTimeString() %></span>
+                            <p id ="font"><%=comment.comment %> </p>
+                        <span class="time-right"><%= comment.firstname %>&nbsp; <%= comment.lastname %></span>
+                        
+                    </div> 
+                <% } else { %>
+                    <div class="container darker"> 
+                        <span class="time-left"><%= comment.date.toLocaleTimeString() %></span>
+                            <p id ="font"><%=comment.comment %> </p>
+                        <span class="time-right"><%= comment.firstname %>&nbsp; <%= comment.lastname %></span>
+                    </div> 
+                <% } %>
+                <% i ++ %>
+                
+            <% }) %>
         <% } %>
-
+        
 
     </div>
-
 
 
     
 
-    <!-- Comment input block -->
-    <div id="wrapper2" onshow="">
-        <div id="lesson1" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: burlywood; font-size: 100%;">
-            <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
-
-                <input type="text" id="comment1" placeholder="Kommentar" name="commentInput" style="margin-right: 200px;">
-            
-        </form>
-        </div>
-        
-        
-    </div>
+    
   
     
 
