@@ -67,21 +67,19 @@ app.post('/', function(req, res) {
     comment = req.body.commentInput;
     if(typeof comment !== 'undefined' && loggedinUser){
         const _comment = new Comment({
-            date: new Date(),
+            date: new Date(dt),
             username: loggedinUser.email,
             comment: comment,
             firstname: loggedinUser.firstname,
             lastname: loggedinUser.lastname
         });
         _comment.save()
-        .then((result) =>{
-            res.redirect('/');
-        })
         .catch((err) => {
             console.log(err);
             res.send(err);
         });
     }
+    res.redirect('/');
 });
 
 app.post('/vecka', function(req, res) {
@@ -221,27 +219,30 @@ app.set('view engine', 'ejs');
 
 
 //app.gets // the async might not work properly...
-app.get('/', async (req, res) => {
-    
-    comments = await Comment.find().exec();
-    console.log(comments);
+app.get('/', (req, res) => {
     dtstr = new Date(dt).toLocaleDateString();
-    Schedule.findOne({ date: { $gte: new Date(dtstr), $lt: new Date(addDay(dtstr))
+    Schedule.findOne({ date: { $gte: new Date(dtstr), $lt: new Date(addDay(dtstr)) }
+                })
+            .then(doc =>{
+            if(doc != null){
+                am = doc.am;
+                pm = doc.pm;
+                place = doc.location;
             }
-        })
-    .then(doc =>{
-        if(doc != null){
-            am = doc.am;
-            pm = doc.pm;
-            place = doc.location;
-        }
-        else{
-            am = "";
-            pm = "";
-            place = "";
-        }
+            else{
+                am = "";
+                pm = "";
+                place = "";
+            }
+            Comment.find({ date: { $gte: new Date(dtstr), $lt: new Date(addDay(dtstr)) }
+                })
+            .sort({date: 'desc'})
+            .then(result =>{
+                comments = result;
+                res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comments: comments});
+            })
         // res.send(am + pm + place);
-        res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comments: comments});
+        
     })
     .catch((err) => {
        console.log(err);
