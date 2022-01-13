@@ -22,23 +22,29 @@ background-image: url("img/background_forest_gray.jfif");
         <button id="button2" name="right" value="true" style="left: 885px; top: 74px;">></button>
     </form>
     
-    <div style="position: fixed; top: 2%;">
-            <div class="register-button">
-                <a href="http://localhost:3000/register">
-                    <button>Register</button></a>
-            </div>
-            <!--LoginButton-->
-            <div class="login-button">
-                <a href="http://localhost:3000/login">
-                    <button>Login</button></a>
-            </div>
-            <!-- WeekButton -->
-            <div class="week-button">
-                <a href="http://localhost:3000/vecka">
-                    <button>Vecka</button></a>
-            </div>
-        </div>
+    <!--Sidenav w/ script-->
+    <div style="width: 2.5%; position: absolute; top: 2.5%;">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="http://localhost:3000/login">Logga In</a>
+        <a href="http://localhost:3000/register">Registera Konto</a>
+        <a href="http://localhost:3000/">Dagsschema</a>
+        <a href="http://localhost:3000/vecka">Veckoschema</a>
+        <a href="http://localhost:3000/add_schedule">Lägg till schema</a>
+      </div>
+      <span style="font-size:30px;cursor:pointer; color: burlywood;" onclick="openNav()">&#9776;</span>
     </div>
+      
+      <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+      
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+      </script>
+
     <!-- <button name="left" value="true">Previous</button>
     <button name="right" value="true">Next</button> -->
     <div style="height: 160px;"></div>

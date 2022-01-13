@@ -1,56 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+    body {
+    background-image: url("img/background_forest_gray.jfif");
+    }
+</style> 
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+ <link rel="stylesheet" href="css/register.css">
 <title>Lägg till ny dag</title>
 </head>
 <body>
-    <table>
-        <form action="" method="post">
-            <tr>
-                <td>Datum:</td>
-                <td><input type="text" id="date" name="dateInput"></td>
-            </tr>
-            <tr>
-                <td>Plats:</td>
-                <td><input type="text" id="location" name="locationInput"></td>
-            </tr>
-            <tr>
-                <td>Kurs:</td>
-                <td><input type="text" id="course" name="courseInput"></td>
-            </tr>
-            <tr>
-                <td>Ansvarig lärare 1:</td>
-                <td><input type="text" id="teacher1" name="teacher1Input"></td>
-            </tr>
-            <tr>
-                <td>Förmiddag:</td>
-                <td><input type="text" id="am" name="amInput"></td>
-            </tr>
-            <tr>
-                <td>Eftermiddag:</td>
-                <td><input type="text" id="pm" name="pmInput"></td>
-            </tr>
-            <tr>
-                <td>Ansvarig lärare 2 (frivillig):</td>
-                <td><input type="text" id="teacher2" name="teacher2Input"></td>
-            </tr>
-            <tr>
-                <td>Topic (frivillig):</td>
-                <td><input type="text" id="topic" name="topicInput"></td>
-            </tr>
-            <tr>
-                <td>Kommentar förmiddag (frivillig):</td>
-                <td><input type="text" id="amcom" name="amcomInput"></td>
-            </tr>
-            <tr>
-                <td>Kommentar eftermiddag (frivillig):</td>
-                <td><input type="text" id="pmcom" name="pmcomInput"></td>
-            </tr>
-            <!-- Vill lägga till frivilliga alternativ här också: teacher2, teachercomments, topic -->
+    
+    <form action="" method="post">
+        <div class="container">  
+        <center>  <h1>Lägg till Schema</h1> </center>
+      
+      
+      <!--Date Block-->  
+      <div class="above-form">Datum</div>
+      <div class="center-form">  
+      <center>  <label></label> </center>  
+      <input type="text" name="firstname" placeholder="Datum" value="2022-" size="15" required /> 
+      </div> 
+      
+      <!--Location Block-->
+      <div class="above-form">Plats</div>
+      <div class="center-form">
+      <center>  <label></label> </center> 
+      <input type="text" name="lastname" placeholder="Plats" size="15"required />   
+      </div>
+      
+      
+      <!--Course Block-->
+      <div class="above-form">Kurs</div>
+      <div class="center-form">
+      <center> <label></label> </center>  
+      <input type="text" name="phone" placeholder="Kurs" size="2"/>     
+      </div>
+      
+      <!--Responsible Teacher Block-->
+      <div class="above-form">Ansvarig lärare 1</div>
+      <div class="center-form">
+      <center> <label></label> </center>   
+       <input type="text" placeholder="Ansvarig lärare" name="email" required>  
+      </div> 
+      
+      <!--PM Block-->
+      <div class="above-form">Förmiddag</div>
+      <div class="center-form">
+      <center> <label></label> </center>  
+      <input type="password" placeholder="Förmiddag" name="psw" required>  
+      </div> 
+      
+      <!--AM Block-->
+      <div class="above-form">Eftermiddag</div>
+      <div class="center-form">
+      <center> <label></label> </center>   
+      <input type="password" placeholder="Eftermidag" name="psw-repeat" required>  
+      </div>
+    
+       <!--Responsible Teacher Block 2-->
+       <div class="above-form">Ansvarig lärare 2 (frivillig)</div>
+       <div class="center-form">
+       <center> <label></label> </center>   
+       <input type="password" placeholder="Ansvarig lärare" name="psw-repeat" required>  
+       </div>
+    
+        <!--Topic Block-->
+      <div class="above-form">Topic (frivllig)</div>
+      <div class="center-form">
+      <center> <label></label> </center>   
+      <input type="password" placeholder="Topic" name="psw-repeat" required>  
+      </div>
+    
+       <!--PM Comment Block-->
+       <div class="above-form">Kommentar förmiddag (frivillig)</div>
+       <div class="center-form">
+       <center> <label></label> </center>   
+       <input type="password" placeholder="Kommentar förmiddag" name="psw-repeat" required>  
+       </div>
+    
+        <!--AM Comment Block-->
+      <div class="above-form">Kommentar eftermiddag (frivillig)</div>
+      <div class="center-form">
+      <center> <label></label> </center>   
+      <input type="password" placeholder="Kommentar eftermiddag" name="psw-repeat" required>  
+      </div>
+      
+      
+      <div class="center-form">
+      <button type="submit" class="registerbtn">Lägg till schema</button>
+      </div>
+      </form>
 
-            <input type="submit" name="submit" value="submit" />
-        </form>
-    </table>
+      <!--Sidenav w/ script-->
+    <div style="width: 2.5%; position: absolute; top: 1.3%;">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="http://localhost:3000/login">Logga In</a>
+            <a href="http://localhost:3000/register">Registera Konto</a>
+            <a href="http://localhost:3000/">Dagsschema</a>
+            <a href="http://localhost:3000/vecka">Veckoschema</a>
+            <a href="http://localhost:3000/add_schedule">Lägg till schema</a>
+          </div>
+          <span style="font-size:30px;cursor:pointer; color: burlywood;" onclick="openNav()">&#9776;</span>
+        </div>
+          
+          <script>
+          function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+          }
+          
+          function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+          }
+          </script>
 
 
 </body>
