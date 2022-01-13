@@ -236,7 +236,7 @@ app.get('/', (req, res) => {
             }
             Comment.find({ date: { $gte: new Date(dtstr), $lt: new Date(addDay(dtstr)) }
                 })
-            .sort({date: 'desc'})
+            .sort({createdAt: 'desc'})
             .then(result =>{
                 comments = result;
                 res.render('startpage', { placeOut: place, amOut: am, pmOut: pm, dateOut: dtstr, comments: comments});
