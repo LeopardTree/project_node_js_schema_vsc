@@ -110,14 +110,14 @@ background-image: url("img/background_forest_gray.jfif");
             <% comments.forEach(comment => { %>
                 <% if (i % 2 == 0){%>
                     <div class="container"> 
-                        <span class="time-left"><%= comment.date.toLocaleTimeString() %></span>
+                        <span class="time-left"><%= comment.createdAt.toLocaleString() %></span>
                             <p id ="font"><%=comment.comment %> </p>
                         <span class="time-right"><%= comment.firstname %>&nbsp; <%= comment.lastname %></span>
                         
                     </div> 
                 <% } else { %>
                     <div class="container darker"> 
-                        <span class="time-left"><%= comment.date.toLocaleTimeString() %></span>
+                        <span class="time-left"><%= comment.createdAt.toLocaleString() %></span>
                             <p id ="font"><%=comment.comment %> </p>
                         <span class="time-right"><%= comment.firstname %>&nbsp; <%= comment.lastname %></span>
                     </div> 
