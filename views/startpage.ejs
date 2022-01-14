@@ -5,36 +5,6 @@
     body {
 background-image: url("img/background_forest_gray.jfif");
 }
-/* https://www.w3schools.com/howto/howto_css_chat.asp */
-.container {
-    border: 2px solid burlywood;
-    
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.darker {
-    border-color: lightslategray;
-    
-}
-
-.container::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-
-.time-right {
-    float: right;
-    color: #aaa;
-}
-
-.time-left {
-    float: left;
-    color: #999;
-}
 </style>
 <link rel="stylesheet" href="css/style.css">
 <title>OOP2 Schema</title>
@@ -100,15 +70,16 @@ background-image: url("img/background_forest_gray.jfif");
         </div>
     </div>
 
-    <!-- Comments block -->
-    <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
-
-        <input type="text" id="comment1" placeholder="Kommentar" name="commentInput" style="margin-right: 200px;">
-            
-    </form>
-
     
-    <h2 ><FONT COLOR="lightslategray">Comments:</FONT></h2> 
+    
+    <!-- Comments block -->
+    <div>
+        <form name="form1" action="" method="post" id="userInput" style="width: 600px;" >
+            <input type="text" id="comment1" placeholder="Kommentar" name="commentInput" style="margin-right: 200px;">
+        </form>
+    </div>
+    
+    
     </div>
         <% var i = 0%>
         <% if (comments.length > 0 ) { %>
@@ -132,17 +103,7 @@ background-image: url("img/background_forest_gray.jfif");
                 
             <% }) %>
         <% } %>
-        
-
     </div>
-
-
-    
-
-    
-  
-    
-
 
     <!--https://stackoverflow.com/questions/28603658/can-a-js-script-get-a-variable-written-in-a-ejs-context-page-within-the-same-fil-->
 

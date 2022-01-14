@@ -213,4 +213,36 @@
     .sidenav a {font-size: 18px;}
   }
 
+  
+  /* https://www.w3schools.com/howto/howto_css_chat.asp */
+  .container {
+    border: 2px solid burlywood;
+    
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: lightslategray;
+    
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
+
 
