@@ -129,27 +129,27 @@
 }
 
 #button1{
-    background-color: transparent; 
-    background-repeat: no-repeat; 
-    border: none; 
-    cursor: pointer; 
-    overflow: hidden; 
-    outline: none; 
-    color: burlywood; 
-    font-size: 150%; 
+    display: inline-block;
     position: fixed;
+    right: 55.5%;
+    top: 8.9%;
+    background: transparent;
+    border: none;
+    color: lightslategray;
+    font-size: 195%;
+    cursor: pointer;
 }
 
 #button2{
-    background-color: transparent; 
-    background-repeat: no-repeat; 
-    border: none; 
-    cursor: pointer; 
-    overflow: hidden; 
-    outline: none; 
-    color: burlywood; 
-    font-size: 150%; 
+    display: inline-block;
     position: fixed;
+    right: 42.5%;
+    top: 8.9%;
+    background: transparent;
+    border: none;
+    color: lightslategray;
+    font-size: 195%;
+    cursor: pointer;
 }
 
 .register-button {

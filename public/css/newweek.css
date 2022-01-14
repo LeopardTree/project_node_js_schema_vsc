@@ -49,3 +49,27 @@ table {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+  #button1 {
+    display: inline-block;
+    position: fixed;
+    right: 55%;
+    top: 4.5%;
+    background: transparent;
+    border: none;
+    color: burlywood;
+    font-size: 195%;
+    cursor: pointer;
+  }
+
+  #button2 {
+    display: inline-block;
+    position: fixed;
+    right: 43.5%;
+    top: 4.5%;
+    background: transparent;
+    border: none;
+    color: burlywood;
+    font-size: 195%;
+    cursor: pointer;
+  }

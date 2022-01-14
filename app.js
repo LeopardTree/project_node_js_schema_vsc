@@ -62,7 +62,7 @@ app.use(function (req, res, next) {
 // }
 //app.posts
 app.post('/', function(req, res) {
-    left = req.body.left,
+    left = req.body.left;
     right = req.body.right;
     comment = req.body.commentInput;
     if(typeof comment !== 'undefined' && loggedinUser){
