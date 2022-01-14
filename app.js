@@ -167,16 +167,29 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/add_schedule', (req, res) =>{
-    let newdate = req.body.dateInput;
-    let newloc = req.body.locationInput;
-    let newteacher1 = req.body.teacher1Input;
-    let newam = req.body.amInput;
-    let newpm = req.body.pmInput;
-    let newcourse = req.body.courseInput;
-    let newteacher2 = req.body.teacher2Input;
-    let newtopic = req.body.topicInput;
-    let newamcom = req.body.amcomInput;
-    let newpmcom = req.body.pmcomInput;
+    let newdate = req.body.date;
+    console.log(newdate);
+    try{
+        let datearr = newdate.split('-');
+        console.log(datearr);
+        // month starts with 0
+        newdate = new Date(datearr[0], datearr[1]-1, datearr[2], 24); 
+        console.log(newdate);
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+
+    let newloc = req.body.location;
+    let newteacher1 = req.body.teacher1;
+    let newam = req.body.morning;
+    let newpm = req.body.afternoon;
+    let newcourse = req.body.course;
+    let newteacher2 = req.body.teacher2;
+    let newtopic = req.body.topic;
+    let newamcom = req.body.morningcomment;
+    let newpmcom = req.body.afternooncomment;
 
     newarr = [newloc, newteacher1, newam, newpm, newcourse, newteacher2, newtopic, newamcom, newpmcom];
     
@@ -210,6 +223,7 @@ app.post('/add_schedule', (req, res) =>{
     })
     .catch((err) => {
        console.log(err);
+       res.send(err);
     });
 });
 
