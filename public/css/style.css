@@ -12,7 +12,7 @@
 
 #wrapper2{
     height: 25px; 
-    margin-top: 0.5%; 
+    margin-top: 0%; 
     width: 100%;
 }
 
@@ -97,6 +97,12 @@
 #font{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
     color: burlywood; 
+    text-align: center;
+}
+
+#font1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    color: black; 
     text-align: center;
 }
 
