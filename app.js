@@ -11,8 +11,6 @@ const User = require('./models/userprofile');
 const Comment = require('./models/usercomment');
 
 // global fields
-var comment1 = "";
-var comment2 = "";
 var place = "";
 var am = "";
 var pm = "";
