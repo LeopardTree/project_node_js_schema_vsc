@@ -117,7 +117,7 @@ app.post('/register', function(req, res) {
                 });
                 user.save()
                 .then((result) =>{
-                    res.send(result)
+                    res.redirect('/login');
                 })
                 .catch((err) => {
                     console.log(err);
@@ -211,7 +211,7 @@ app.post('/add_schedule', (req, res) =>{
             });
             schedule.save()
             .then((result) =>{
-                res.send(result)
+                res.redirect('/add_schedule');
             })
             .catch((err) => {
                 console.log(err);
